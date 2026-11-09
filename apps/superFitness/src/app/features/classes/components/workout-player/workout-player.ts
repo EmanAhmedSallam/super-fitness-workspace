@@ -1,6 +1,6 @@
 import { Component, computed, effect, inject, input, signal, untracked } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { getYouTubeThumbnailUrl, getYouTubeVideoId } from '../../utils/youtube-video.utils';
+import { getYouTubeThumbnailUrl } from '../../utils/youtube-video.utils';
 
 @Component({
   selector: 'app-workout-player',

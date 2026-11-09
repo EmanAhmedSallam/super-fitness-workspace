@@ -18,8 +18,8 @@
   "ui": {
     "theme": {
       "label": "الوضع",
-      "light": "نهار",
-      "dark": "ليل"
+      "light": "الفاتح",
+      "dark": "الداكن"
     },
     "language": {
       "label": "اللغة",

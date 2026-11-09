@@ -20,7 +20,6 @@ import { MuscleGroupModel, MuscleModel } from '../../models/muscles.model';
 import { DifficultyLevelsService } from '../../services/difficulty-levels.service';
 import { ExercisesService } from '../../services/exercises.service';
 import { MusclesService } from '../../services/muscles.service';
-import { getYouTubeThumbnailUrl } from '../../utils/youtube-video.utils';
 
 @Component({
   selector: 'app-workout-details-page',
