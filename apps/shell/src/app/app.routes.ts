@@ -1,9 +1,13 @@
 import { Route } from '@angular/router';
+import { authGuard } from '@super-fitness/auth';
 import { loadRemote } from '@module-federation/enhanced/runtime';
 
 export const appRoutes: Route[] = [
+
+  { path: '', pathMatch: 'full', redirectTo: 'superFitness' },
   {
     path: 'superFitness',
+    
     loadChildren: () =>
       loadRemote<typeof import('superFitness/Routes')>(
         'superFitness/Routes',
@@ -26,4 +30,5 @@ export const appRoutes: Route[] = [
         },
       ),
   },
+  { path: '**', redirectTo: 'superFitness' },
 ];

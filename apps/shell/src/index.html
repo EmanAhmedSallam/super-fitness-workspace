@@ -2,7 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>shell</title>
+    <script>
+      let theme = 'dark';
+      try {
+        if (localStorage.getItem('super-fitness.theme') === 'light') {
+          theme = 'light';
+        }
+      } catch {}
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+    </script>
+    <title>Super Fitness</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />

@@ -1,0 +1,13 @@
+<div class="overflow-hidden bg-[#ff4100] text-white" [attr.aria-label]="'landing.marquee.label' | translate">
+  <div class="marquee-track flex w-max" aria-hidden="true">
+    <!-- Two identical halves; the track slides by -50% so the loop is seamless -->
+    @for (half of [0, 1]; track half) {
+      <div class="flex shrink-0 items-center whitespace-nowrap py-3.75">
+        @for (item of loopItems; track $index) {
+          <span class="ps-4.5 text-[15px] font-bold uppercase">{{ item | translate }}</span>
+          <b class="ps-4.5 text-lg">&#10022;</b>
+        }
+      </div>
+    }
+  </div>
+</div>

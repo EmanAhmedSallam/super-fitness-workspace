@@ -1,0 +1,23 @@
+.tabbed-list-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #ff4100 transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabbed-list-scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.tabbed-list-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tabbed-list-scroll::-webkit-scrollbar-thumb {
+  background: #ff4100;
+  border-radius: 999px;
+}
+
+.tabbed-list-scroll::-webkit-scrollbar-button {
+  display: none;
+}

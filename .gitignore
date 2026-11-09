@@ -54,3 +54,4 @@ vitest.config.*.timestamp*
 .nx/polygraph
 .nx/self-healing
 .nx/migrate-runs
+packages/data-access-user/src/lib/api/secrets.ts

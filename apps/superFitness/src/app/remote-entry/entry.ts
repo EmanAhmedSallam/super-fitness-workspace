@@ -3,7 +3,9 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   imports: [RouterModule],
-  selector: 'app-superFitness-entry',
-  template: `<router-outlet/>`,
+  selector: 'app-super-fitness-entry',
+  template: `
+    <router-outlet />
+  `,
 })
-export class RemoteEntry {}
+export class RemoteEntry { }

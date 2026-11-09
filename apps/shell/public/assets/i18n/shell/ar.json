@@ -1,0 +1,42 @@
+{
+  "app": {
+    "name": "سوبر فيتنس"
+  },
+  "form": {
+    "requiredMessage": "{{label}} مطلوب",
+    "selectPlaceholder": "اختر",
+    "submit": "إضافة",
+    "submitting": "جارٍ الإرسال...",
+    "showPassword": "إظهار كلمة المرور",
+    "hidePassword": "إخفاء كلمة المرور",
+    "upload": {
+      "uploadFile": "رفع ملف",
+      "view": "عرض {{label}}",
+      "tooLarge": "حجم الملف كبير جدًا، لم تتم إضافته: {{files}}"
+    }
+  },
+  "ui": {
+    "theme": {
+      "label": "الوضع",
+      "light": "الفاتح",
+      "dark": "الداكن"
+    },
+    "language": {
+      "label": "اللغة",
+      "english": "الإنجليزية",
+      "arabic": "العربية",
+      "switchToArabic": "تغيير اللغة إلى العربية",
+      "switchToEnglish": "تغيير اللغة إلى الإنجليزية"
+    },
+    "stepProgress": {
+      "label": "الخطوة {{current}} من {{total}}"
+    },
+    "gallery": {
+      "close": "إغلاق",
+      "previous": "الصورة السابقة",
+      "next": "الصورة التالية",
+      "showImage": "عرض الصورة {{index}}",
+      "imageAlt": "صورة مرفوعة"
+    }
+  }
+}

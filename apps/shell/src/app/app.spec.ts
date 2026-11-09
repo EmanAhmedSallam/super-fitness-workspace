@@ -1,39 +1,55 @@
 import { TestBed } from '@angular/core/testing';
+import { Route, provideRouter } from '@angular/router';
 import { App } from './app';
-import { NxWelcome } from './nx-welcome';
-import { Router, RouterModule } from '@angular/router';
+import { appRoutes } from './app.routes';
+
+function byPath(path: string): Route {
+  const route = appRoutes.find((r) => r.path === path);
+  if (!route) throw new Error(`No route configured for "${path}"`);
+  return route;
+}
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterModule.forRoot([{ path: '', component: NxWelcome }]),
-        App,
-        NxWelcome,
-      ],
+      imports: [App],
+      providers: [provideRouter([])],
     }).compileComponents();
   });
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it(`should have as title 'shell'`, () => {
+  it('renders the routed remote through an outlet', async () => {
     const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('shell');
-  });
-
-  it('should render title', async () => {
-    const fixture = TestBed.createComponent(App);
-    const router = TestBed.inject(Router);
-    await router.navigate(['']);
     await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome shell',
-    );
+
+    expect(fixture.nativeElement.querySelector('router-outlet')).toBeTruthy();
+  });
+});
+
+describe('appRoutes', () => {
+  it('lands on the auth remote', () => {
+    const root = byPath('');
+
+    expect(root.pathMatch).toBe('full');
+    expect(root.redirectTo).toBe('auth');
+  });
+
+  it('sends unknown URLs to auth as well', () => {
+    expect(byPath('**').redirectTo).toBe('auth');
+  });
+
+  it('lazily loads each remote rather than bundling it', () => {
+    for (const path of ['auth', 'superFitness']) {
+      expect(typeof byPath(path).loadChildren, path).toBe('function');
+      expect(byPath(path).component, path).toBeUndefined();
+    }
+  });
+
+  it('keeps the catch-all last so it cannot shadow a real route', () => {
+    expect(appRoutes.at(-1)?.path).toBe('**');
   });
 });

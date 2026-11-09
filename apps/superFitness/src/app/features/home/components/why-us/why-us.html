@@ -1,0 +1,46 @@
+<section
+  libIntersectionObserverDirective
+  [observeOnce]="true"
+  [rootMargin]="'0px 0px -50px 0px'"
+  (visibilityChange)="onSectionVisible($event.isIntersecting)"
+  [class.opacity-100]="isVisible()"
+  [class.opacity-0]="!isVisible()"
+  [class.translate-y-0]="isVisible()"
+  [class.translate-y-8]="!isVisible()"
+  class="mx-auto grid w-[min(var(--page-width),calc(100%_-_var(--page-gutter)*2))] grid-cols-[minmax(0,1fr)_minmax(420px,0.98fr)] items-center gap-[clamp(40px,6vw,86px)] bg-[#f1f3f4] dark:bg-[#1e1e1e] py-[78px] pb-[86px] opacity-0 translate-y-8 transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100 max-[800px]:grid-cols-1 max-[800px]:gap-[38px] max-[800px]:py-[54px]"
+  aria-labelledby="why-title"
+>
+  <div class="relative">
+    <lib-section-title
+      [primaryText]="'landing.whyUs.sectionPrimary' | translate"
+      [secondaryText]="'landing.whyUs.sectionSecondary' | translate"
+      size="sm"
+      padding="0"
+      class="w-fit"
+    />
+    <lib-paragraph-title
+      id="why-title"
+      [segments]="[
+        { text: 'landing.whyUs.titlePrefix' | translate },
+        { text: 'landing.whyUs.titleHighlight' | translate, highlight: true },
+        { text: 'landing.whyUs.titleSuffix' | translate }
+      ]"
+      class="relative my-[26px] mb-[18px] block max-w-[570px] uppercase"
+    />
+    <lib-paragraph-description
+      [text]="'landing.whyUs.description' | translate"
+      class="block max-w-[620px]"
+    />
+    <ol class="mt-8 grid list-none gap-5 p-0">
+      @for (reason of reasons; track reason.number) {
+        <li class="grid grid-cols-[42px_1fr] items-center gap-4"><span class="grid size-[42px] place-items-center rounded-full bg-[#ff4100] text-[11px] font-extrabold text-white">{{ reason.number }}</span><div><h3 class="mb-[5px] text-sm font-bold">{{ reason.title | translate }}</h3><p class="m-0 text-[13px] leading-[1.65] text-[#505254] dark:text-[#b5b5b5]">{{ reason.body | translate }}</p></div></li>
+      }
+    </ol>
+  </div>
+  <div class="grid h-[500px] grid-cols-2 grid-rows-2 gap-[9px] max-[800px]:h-[min(112vw,500px)]" [attr.aria-label]="'landing.whyUs.galleryLabel' | translate">
+    <img class="block h-[90%] w-full rounded-[13px] object-cover" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=700&q=85" [alt]="'landing.whyUs.images.modernGym' | translate" />
+    <img class="block h-[83%] w-full self-end rounded-[13px] object-cover" src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=700&q=85" [alt]="'landing.whyUs.images.freeWeights' | translate" />
+    <img class="block h-[90%] w-full rounded-[13px] object-cover" src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=700&q=85" [alt]="'landing.whyUs.images.personalTraining' | translate" />
+    <img class="block h-[94%] w-full self-start rounded-[13px] object-cover" src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=700&q=85" [alt]="'landing.whyUs.images.stretching' | translate" />
+  </div>
+</section>

@@ -1,0 +1,13 @@
+.form-row {
+  display: grid;
+  gap: 1rem;
+  margin-block-end: 1rem;
+  align-items: start;
+}
+
+.field-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}

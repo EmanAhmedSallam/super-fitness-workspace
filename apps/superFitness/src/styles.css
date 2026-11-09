@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Baloo 2', system-ui, sans-serif;
+}
+
+@font-face {
+  font-family: 'Baloo 2';
+  font-weight: 400 700;
+  src: url('/assets/fonts/baloo2.woff2');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-weight: 900;
+  src: url('/assets/fonts/nunito.woff2');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-weight: 700;
+  src: url('/assets/fonts/ubuntu.woff2');
+}
+
+@source "../src";
+@source "../../../packages/ui/src";
+
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+/* Page colors for light / dark theme (ThemeService toggles .dark on <html>) */
+@layer base {
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #f7f8f8;
+    color: #242424;
+  }
+
+  html.dark body {
+    background-color: #242424;
+    color: #f3f3f4;
+  }
+}

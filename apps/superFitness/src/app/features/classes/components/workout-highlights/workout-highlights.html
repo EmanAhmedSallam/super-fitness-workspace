@@ -1,0 +1,24 @@
+<ul class="m-0 flex list-none flex-wrap items-center gap-4 p-0">
+  @for (n of [1, 2, 3]; track n) {
+  <li class="inline-flex items-center gap-2
+               dark:text-[#F3F3F4] text-[#242424] 
+             ">
+
+    <span aria-hidden="true" class="grid shrink-0 place-items-center rounded-full border-[clamp(1.5px,0.15vw,2.12px)] border-[#F3F3F4] bg-[#FF4100] text-[#F3F3F4]
+         size-[clamp(1.75rem,0.9rem+1.5vw,2.2rem)]">
+      <svg  viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+       class="h-auto w-[50%] rtl:-scale-x-100">
+        <path
+          d="M17 5.66001C14.562 5.66001 12.34 3.439 12.34 1V0H10.34V1C10.34 2.774 11.118 4.438 12.339 5.66001H0V7.66001H12.339C11.118 8.88201 10.34 10.546 10.34 12.32V13.32H12.34V12.32C12.34 9.88101 14.562 7.66001 17 7.66001H18V5.66001H17Z"
+          fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" />
+      </svg>
+
+    </span>
+
+    <span class="whitespace-nowrap font-['Baloo_Thambi_2'] font-bold capitalize leading-[1.4]
+               text-[clamp(0.6875rem,0.55rem+0.4vw,2.5rem)]  dark:text-[#F3F3F4] text-[#242424]">
+      {{ 'workouts.expertlyDesigned' | translate }}
+    </span>
+  </li>
+  }
+</ul>

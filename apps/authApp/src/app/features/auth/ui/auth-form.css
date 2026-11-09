@@ -1,0 +1,61 @@
+:host {
+  display: block;
+}
+
+.auth-form {
+  --lib-field-height: max(38px, calc(49 * var(--u)));
+  --lib-field-radius: calc(18 * var(--u));
+  --lib-field-pad-inline: calc(19 * var(--u));
+  --lib-field-font-size: max(12px, calc(14 * var(--u)));
+  --lib-field-bg: rgb(0 0 0 / 22%);
+  --lib-field-color: #fff;
+  --lib-field-border: rgb(255 255 255 / 62%);
+  --lib-field-border-hover: #fff;
+  --lib-field-placeholder: #cfcfcf;
+  --lib-field-icon: #a3a3a3;
+  --lib-field-label: #d4d4d4;
+  --lib-field-accent: var(--auth-accent, #ff4100);
+  --lib-field-ring: rgb(255 65 0 / 22%);
+  --lib-field-error: #ff7a5c;
+  --lib-field-color-scheme: dark;
+
+  display: block;
+}
+
+.auth-form ::ng-deep .form-row {
+  gap: calc(16 * var(--u));
+  margin-bottom: calc(16 * var(--u));
+}
+
+.auth-form ::ng-deep .form-submit {
+  display: block;
+  width: 100%;
+  min-height: max(34px, calc(40 * var(--u)));
+  margin-top: calc(26 * var(--u));
+  padding: 0 1.5rem;
+  background: var(--auth-accent, #ff4100);
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: max(14px, calc(16.5 * var(--u)));
+  font-weight: 600;
+  transition:
+    background-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.auth-form ::ng-deep .form-submit:hover:not(:disabled) {
+  background: #e83b00;
+}
+
+.auth-form ::ng-deep .form-submit:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.auth-form ::ng-deep .form-submit:disabled {
+  cursor: progress;
+  opacity: 0.75;
+}

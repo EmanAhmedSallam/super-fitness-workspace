@@ -1,0 +1,55 @@
+<div class="field-control">
+  <span
+    class="field-label"
+    [class.sr-only]="field().hideLabel"
+    [id]="field().key + '-label'"
+  >
+    {{ field().label }}{{ field().required ? ' *' : '' }}
+  </span>
+
+  @if (hasExistingImages()) {
+    <button
+      type="button"
+      class="upload-box upload-action"
+      (click)="galleryOpen.set(true)"
+    >
+      <lib-field-icon name="image" [size]="18" />
+      {{ 'form.upload.view' | translate: { label: field().label } }}
+    </button>
+  } @else {
+    <label class="upload-box">
+      <span class="upload-action">
+        <lib-field-icon name="upload" [size]="18" />
+        {{ 'form.upload.uploadFile' | translate }}
+      </span>
+      <input
+        type="file"
+        class="sr-only"
+        [attr.aria-labelledby]="field().key + '-label'"
+        [accept]="field().accept ?? ''"
+        [multiple]="field().multiple ?? false"
+        (change)="onFilesSelected($event)"
+      />
+    </label>
+  }
+
+  @if (fileNames().length) {
+    <ul class="upload-files">
+      @for (name of fileNames(); track name) {
+        <li>{{ name }}</li>
+      }
+    </ul>
+  }
+
+  @if (rejected().length) {
+    <span class="field-error" role="alert">
+      {{ 'form.upload.tooLarge' | translate: { files: rejected().join(', ') } }}
+    </span>
+  }
+
+  <lib-image-gallery-modal
+    [images]="currentUrls()"
+    [alt]="field().label"
+    [(open)]="galleryOpen"
+  />
+</div>

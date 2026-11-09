@@ -1,0 +1,25 @@
+<div class="nrs-page">
+  <div class="nrs-content">
+    <!-- Circular arc progress ring: e.g. "2/6" -->
+    <lib-step-progress class="nrs-progress" [current]="currentStep()" [total]="totalSteps()" />
+
+    <lib-question-title [text]="title()" />
+    <lib-question-description [text]="description()" />
+
+    <!-- Horizontal numeric drum-roll wheel -->
+    <!-- Numbers scroll left-to-right in every language, so the wheel never mirrors. -->
+    <div class="nrs-wheel" dir="ltr">
+      <ng-container [ngTemplateOutlet]="selectorTemplate() ?? defaultSelector"
+        [ngTemplateOutletContext]="selectorContext()" />
+      <ng-template #defaultSelector>
+        <lib-numeric-wheel-selector [min]="min()" [max]="max()" [step]="step()" [unit]="unit()" [(value)]="value" />
+      </ng-template>
+    </div>
+
+    <!-- Primary CTA -->
+    <button id="numeric-step-next-btn" type="button" class="nrs-btn" (click)="onNext()"
+      [attr.aria-label]="nextLabel() || ('auth.register.common.next' | translate)">
+      {{ nextLabel() || ('auth.register.common.next' | translate) }}
+    </button>
+  </div>
+</div>

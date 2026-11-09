@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  margin: clamp(3rem, 8vw, 6rem) auto 0;
+  width: 100%;
+  max-width: 900px;
+}
+
+.account-settings-section__title {
+  margin: 0 0 clamp(1.5rem, 4vw, 2.5rem);
+  text-align: center;
+  font-size: clamp(1.75rem, 1.25rem + 2vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.account-settings-section__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 209px), 209px));
+  justify-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+}

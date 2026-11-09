@@ -1,0 +1,245 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "classes": "Classes",
+    "healthy": "Healthy",
+    "account": "Account",
+    "login": "LOGIN",
+    "register": "SIGN UP",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "workouts": {
+    "title": "Workouts",
+    "subtitle": "Fitness class",
+    "loading": "Loading muscles...",
+    "loadingWorkouts": "Loading workouts...",
+    "descriptionPrefix": "Transform Your Body with Our Dynamic ",
+    "descriptionHighlight": "Upcoming Workouts",
+    "recommendationForYou": "Recommendation For You",
+    "expertlyDesigned": "Expertly designed workout .",
+    "difficultyLevels": "Difficulty levels",
+    "loadingDifficultyLevels": "Loading difficulty levels...",
+    "noDifficultyLevels": "No difficulty levels found.",
+    "exercises": "Exercises",
+    "loadingExercises": "Loading exercises...",
+    "noExercises": "No exercises found.",
+    "videoPlayer": "Workout video player",
+    "videoUnavailable": "Workout video coming soon",
+    "videoUnsupported": "Your browser does not support video playback.",
+    "error": "Unable to load workouts. Please try again later.",
+    "empty": "No muscles found.",
+    "explore": "Explore",
+    "readMore": "Read more",
+    "more": "More workouts",
+    "backToHome": "Back to home"
+  },
+  "healthy": {
+    "title": "Healthy",
+    "subtitle": "Healthy Nutritions",
+    "descriptionPrefix": "Fuel your fitness journey with customized ",
+    "descriptionHighlight": "meal plans",
+    "descriptionSuffix": " for you",
+    "loading": "Loading meal categories...",
+    "readMore": "Read more",
+    "more": "More healthy categories",
+    "backToHome": "Back to home",
+    "error": "Unable to load meal categories. Please try again later.",
+    "empty": "No meal categories are available.",
+    "loadingMeals": "Loading meals...",
+    "mealsError": "Unable to load meals. Please try again later.",
+    "emptyMeals": "No meals found in this category.",
+    "details": {
+      "back": "Back to meals",
+      "loading": "Loading meal...",
+      "error": "Unable to load this meal. Please try again later.",
+      "notFound": "This meal could not be found.",
+      "itemDescription": "A healthy {{category}} recipe, tap to see the ingredients and steps.",
+      "category": "Category",
+      "area": "Cuisine",
+      "ingredientsCount": "Ingredients",
+      "steps": "Steps",
+      "ingredients": "Ingredients",
+      "instructions": "Instructions",
+      "watchVideo": "Watch video"
+    }
+  },
+  "landing": {
+    "hero": {
+      "headlineFirst": "Your body can",
+      "headlineHighlight": " stand",
+      "headlineSecondHighlight": "almost",
+      "headlineSecond": " anything",
+      "description": "It's your mind that needs convincing. Push past your limits, stay committed, and watch as your body transforms into a powerhouse of strength and resilience. Start your journey today and discover what you're truly capable of.",
+      "activeMembers": "Active Members",
+      "certifiedTrainers": "Certified Trainers",
+      "yearsExperience": "Year Of Experience",
+      "getStarted": "Get Started",
+      "exploreMore": "Explore More",
+      "assistantPrompt": "Hey Ask Me",
+      "athleteAlt": "Athlete in a blue training top"
+    },
+    "aboutUs": {
+      "sectionPrimary": "Workouts",
+      "sectionSecondary": "About Us",
+      "titlePrefix": "Empowering you to achieve ",
+      "titleHighlight": "your fitness",
+      "titleSuffix": " goals",
+      "description": "We believe fitness is more than just a workout—it's a lifestyle. With top-of-the-line facilities, certified trainers, and a supportive community, we're here to inspire and guide you every step of the way.",
+      "galleryLabel": "Personal training at the gym",
+      "images": {
+        "kettlebell": "Athlete training with a kettlebell",
+        "strength": "Strength training in a modern gym",
+        "studio": "Bright, fully equipped fitness studio"
+      },
+      "benefits": {
+        "personalTrainer": {
+          "title": "Personal Trainer",
+          "body": "Achieve your fitness goals with the guidance of our certified trainers."
+        },
+        "cardioPrograms": {
+          "title": "Cardio Programs",
+          "body": "From steady-state runs to interval sprints, our treadmill programs keep you moving."
+        },
+        "qualityEquipment": {
+          "title": "Quality Equipment",
+          "body": "Train confidently with the latest cardio and strength machines."
+        },
+        "healthyNutrition": {
+          "title": "Healthy Nutrition",
+          "body": "Fuel your fitness journey with practical, personalized nutrition guidance."
+        }
+      }
+    },
+    "whyUs": {
+      "sectionPrimary": "WHY US",
+      "sectionSecondary": "Why Us",
+      "titlePrefix": "Elevate fitness with the ",
+      "titleHighlight": "best way",
+      "titleSuffix": " possible",
+      "description": "We offer a fitness journey that's tailored to your goals, supported by professional trainers and a welcoming community. Whether it's weight loss, strength building, or overall wellness, our proven methods help you thrive.",
+      "galleryLabel": "Training and fitness facilities",
+      "images": {
+        "modernGym": "Athlete training in a modern gym",
+        "freeWeights": "Strength workout with free weights",
+        "personalTraining": "Personal training session",
+        "stretching": "Member stretching after a workout"
+      },
+      "reasons": {
+        "personalizedPlans": {
+          "title": "Personalized Fitness Plans",
+          "body": "We tailor every workout to fit your unique goals and fitness level, so you keep making progress."
+        },
+        "resultsDriven": {
+          "title": "Results-Driven Focus",
+          "body": "Everything we do is designed to help you achieve measurable results, whether you're aiming for strength or endurance."
+        },
+        "equipment": {
+          "title": "State-of-the-Art Equipment",
+          "body": "Train with the latest gym equipment, from cardio machines to free weights, designed to support every type of workout."
+        }
+      }
+    },
+    "marquee": {
+      "label": "Fitness classes and services",
+      "items": {
+        "fitnessClasses": "Fitness Classes",
+        "outdoorOnlineTrainers": "Outdoor & Online Trainers",
+        "personalTraining": "Personal Training",
+        "liveClasses": "Live Classes",
+        "personalTrainers": "Personal Trainers"
+      }
+    }
+  },
+  "footer": {
+    "taglineLine1": "Push harder, go further. Your",
+    "taglineLine2": "Fitness journey starts today!",
+    "contactUs": "CONTACT US",
+    "phone": "+91 123 456 789",
+    "email": "info@gmail.com",
+    "gymTiming": "OUR GYM TIMING",
+    "monFri": "Mon - Fri : 08:00 AM - 10:00 PM",
+    "satSun": "Sat - Sun : 08:00 AM - 09:00 PM",
+    "location": "OUR LOCATION",
+    "addressLine1": "2715 Ash Dr. San Jose, South",
+    "addressLine2": "Dakota 83475"
+  },
+  "chat": {
+    "smartCoach": "Smart Coach",
+    "askPlaceholder": "Ask Me Any Things",
+    "tapToClose": "Tap To Close",
+    "heyAskMe": "Hey Ask Me",
+    "previousConversations": "Previous Conversations",
+    "greeting": "Hello How Can I Assist You Today ?",
+    "error": "Something went wrong, please try again.",
+    "botAlt": "Bot",
+    "editMessage": "Edit message",
+    "userLabel": "User",
+    "aiLabel": "AI"
+  },
+  "account": {
+    "title": "Account basic metrics",
+    "settingsTitle": "Account Settings",
+    "settings": {
+      "changeLanguage": "Change Language",
+      "mode": "Mode",
+      "password": "Password",
+      "security": "Security",
+      "privacy": "Privacy",
+      "help": "Help",
+      "logout": "Log Out"
+    },
+    "metrics": {
+      "goal": "Your Goal",
+      "activityLevel": "Level",
+      "weight": "Weight"
+    },
+    "tapToChange": "TAP TO CHANGE",
+    "unavailable": "Not available",
+    "unit": "KG",
+    "loading": "Loading your profile…",
+    "saving": "Saving…",
+    "save": "Save",
+    "cancel": "Cancel",
+    "retry": "Try again",
+    "weightRange": "Enter a whole number between 30 and 200 KG.",
+    "editors": {
+      "goal": {
+        "title": "What Is Your Goal?",
+        "description": "This Helps Us Create Your Personalized Plan"
+      },
+      "activityLevel": {
+        "title": "What Is Your Level?",
+        "description": "Choose The Level That Matches Your Activity"
+      },
+      "weight": {
+        "title": "What Is Your Weight?",
+        "description": "We Use This To Calculate Your Ideal Calorie Intake"
+      }
+    },
+    "options": {
+      "goal": {
+        "gainWeight": "Gain Weight",
+        "loseWeight": "Lose Weight",
+        "getFitter": "Get Fitter",
+        "gainFlexible": "Gain More Flexible",
+        "learnBasics": "Learn The Basics"
+      },
+      "activityLevel": {
+        "rookie": "Rookie",
+        "beginner": "Beginner",
+        "intermediate": "Intermediate",
+        "advance": "Advance",
+        "trueBeast": "True Beast"
+      }
+    },
+    "errors": {
+      "loadFailed": "Unable to load your profile. Please try again.",
+      "saveFailed": "Unable to save your change. Please try again.",
+      "network": "Cannot reach the server. Check your connection.",
+      "unauthorized": "Your session has expired. Please sign in again.",
+      "rejected": "The server could not accept this value. Please check your selection and try again."
+    }
+  }
+}

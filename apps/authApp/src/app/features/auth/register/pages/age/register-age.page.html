@@ -1,0 +1,13 @@
+<app-numeric-registration-step
+  [currentStep]="STEP.currentStep"
+  [totalSteps]="STEP.totalSteps"
+  [title]="STEP.titleKey | translate"
+  [description]="STEP.descriptionKey | translate"
+  [min]="STEP.min"
+  [max]="STEP.max"
+  [step]="STEP.step"
+  [unit]="STEP.unitKey | translate"
+  [nextLabel]="STEP.nextLabelKey | translate"
+  [(value)]="age"
+  (next)="onNext($event)"
+/>

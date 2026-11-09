@@ -1,0 +1,32 @@
+<form (submit)="onSubmit($event)" novalidate>
+  @for (row of groupedFields(); track row[0].key) {
+    <div
+      class="form-row"
+      [style.gridTemplateColumns]="'repeat(' + row.length + ', 1fr)'"
+    >
+      @for (field of row; track field.key) {
+        <div class="field-wrapper">
+          <ng-container
+            *ngComponentOutlet="
+              FIELD_COMPONENTS[field.type];
+              inputs: getInputs(field)
+            "
+          ></ng-container>
+        </div>
+      }
+    </div>
+  }
+
+  <ng-content select="[formBeforeSubmit]" />
+
+  <button
+    type="submit"
+    [disabled]="(disableSubmitWhenInvalid() && userForm()().invalid()) || busy()"
+    class="form-submit w-full rounded-xl px-6 py-2.5 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+    [class]="submitClass()"
+  >
+    {{ busy() ? (loadingLabel() ?? ('form.submitting' | translate)) : (submitLabel() ?? ('form.submit' | translate)) }}
+  </button>
+
+  <ng-content select="[formAfterSubmit]" />
+</form>

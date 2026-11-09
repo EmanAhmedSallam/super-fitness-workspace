@@ -1,0 +1,90 @@
+<section
+  libIntersectionObserverDirective
+  [observeOnce]="true"
+  [rootMargin]="'0px 0px -50px 0px'"
+  (visibilityChange)="isVisible = $event.isIntersecting"
+  [class.opacity-100]="isVisible"
+  [class.opacity-0]="!isVisible"
+  [class.translate-y-0]="isVisible"
+  [class.translate-y-8]="!isVisible"
+  class="healthy-section relative flex min-h-[48rem] w-full flex-col items-center overflow-hidden bg-[#F3F3F4] px-[max(var(--page-gutter),calc((100%_-_var(--page-width))/2))] transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none">
+  <!--  Overlay -->
+  <div class="pointer-events-none absolute start-0 top-[57px] z-0 h-[414px] w-full bg-[#FFFFFF99] dark:bg-[#24242499] backdrop-blur-[43px]">
+  </div>
+
+  <div class="relative z-10 mx-auto w-full flex-1 flex flex-col gap-6 mb-4 sm:mb-6 lg:mb-8">
+    <lib-section-title [primaryText]="'healthy.title' | translate"
+      [secondaryText]="'healthy.subtitle' | translate" size="sm" [primaryTextFontSize]="64"
+       />
+
+    <lib-paragraph-title [segments]="[
+    { text: 'healthy.descriptionPrefix' | translate },
+    { text: 'healthy.descriptionHighlight' | translate, highlight: true },
+    { text: 'healthy.descriptionSuffix' | translate }
+  ]" align="center" />
+
+    @if (isLoading()) {
+    <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" role="status">
+      <span class="sr-only">{{ 'healthy.loading' | translate }}</span>
+      @for (card of [1, 2, 3]; track card) {
+      <app-skeleton-loader-card />
+      }
+    </div>
+    } @else if (errorMessage()) {
+    <p class="mt-8 text-center text-lg text-[#242424] dark:text-[#f3f3f4]" role="alert">
+      {{ errorMessage() | translate }}
+    </p>
+    } @else if (mealCategories().length > 0) {
+    <div class="mt-8 w-full">
+      <div class="mx-auto w-full">
+        @if (useCarousel()) {
+        <app-owl-carousel
+          [items]="mealCategories()"
+          [options]="customOptions()"
+          [itemId]="getCategoryId"
+          [horizontalWheel]="true"
+        >
+          <ng-template #slide let-category>
+            <app-info-card
+              [image]="category.strCategoryThumb"
+              [title]="category.strCategory"
+              buttonText="healthy.readMore"
+              (buttonClick)="openCategory(category.strCategory)"
+            />
+          </ng-template>
+        </app-owl-carousel>
+        } @else {
+        <div class="flex flex-wrap justify-center gap-4">
+          @for (category of mealCategories(); track category.idCategory) {
+          <div class="w-full max-w-[480px] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)]">
+            <app-info-card
+              [image]="category.strCategoryThumb"
+              [title]="category.strCategory"
+              buttonText="healthy.readMore"
+              (buttonClick)="openCategory(category.strCategory)"
+            />
+          </div>
+          }
+        </div>
+        }
+      </div>
+      <div class="mt-auto flex justify-end pt-6 pb-4 md:hidden">
+      <a
+        routerLink="healthy"
+        class="rounded-full text-[#FF4100]  py-2
+           text-[13.1px] font-semibold
+           leading-[25.6px] capitalize 
+           transition-colors "
+      >
+        {{ 'healthy.readMore' | translate }}
+      </a>
+      </div>
+    </div>
+    } @else {
+    <p class="mt-8 text-center text-lg text-[#242424] dark:text-[#f3f3f4]">
+      {{ 'healthy.empty' | translate }}
+    </p>
+    }
+  </div>
+
+</section>

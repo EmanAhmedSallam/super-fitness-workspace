@@ -1,0 +1,10 @@
+<app-choice-registration-step
+  [currentStep]="STEP.currentStep"
+  [totalSteps]="STEP.totalSteps"
+  [title]="STEP.titleKey | translate"
+  [description]="STEP.descriptionKey | translate"
+  [options]="STEP.options"
+  [nextLabel]="STEP.nextLabelKey | translate"
+  [(value)]="goal"
+  (next)="onNext($event)"
+/>

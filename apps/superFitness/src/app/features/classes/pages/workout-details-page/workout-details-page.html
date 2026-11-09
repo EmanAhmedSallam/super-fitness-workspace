@@ -1,0 +1,173 @@
+<main class="workout-details-page relative isolate overflow-hidden">
+  <div class="pointer-events-none absolute inset-0 z-0 bg-[#FFFFFF99] dark:bg-[#242424CC] backdrop-blur-[43px]">
+  </div>
+  <div
+    class="relative z-10 mx-auto w-full max-w-[1990px] pt-[72px] pb-[clamp(1.5rem,3.5vw,3.125rem)] ps-[clamp(1rem,5.56vw,5rem)]">
+    <lib-section-title [primaryText]="'workouts.title' | translate" size="sm" [primaryTextFontSize]="64"
+      showIcon="false" />
+
+    <!-- Groups tabs bar -->
+    @if (isLoadingGroups()) {
+    <div class="my-8 flex flex-wrap justify-center gap-3" role="status">
+      <span class="sr-only">{{ 'workouts.loading' | translate }}</span>
+
+      @for (tab of [1, 2, 3, 4]; track tab) {
+      <div class="h-10 w-24 animate-pulse rounded-full bg-[#24242412] motion-reduce:animate-none dark:bg-[#F3F3F412]">
+      </div>
+      }
+    </div>
+    } @else if (errorMessage()) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
+      {{ errorMessage() | translate }}
+    </p>
+    } @else if (muscleGroups().length === 0) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]">
+      {{ 'workouts.empty' | translate }}
+    </p>
+    } @else {
+    <app-tabs-bar class="my-8 block mx-auto" [tabs]="muscleGroupTabs()" [selectedId]="selectedGroupId()"
+      (tabSelected)="selectGroup($event)" widthClass="w-full md:w-4/5 lg:w-1/2" />
+    }
+
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-[clamp(260px,24vw,360px)_minmax(0,1fr)]">
+      <aside class = "order-2 min-w-0 flex flex-col gap-4
+       lg:col-start-1 lg:row-start-1 lg:row-span-2
+       lg:sticky lg:top-[72px]
+       lg:h-[calc(100dvh-72px)]
+       lg:self-start">
+        <div class="flex min-h-0 flex-1 flex-col">
+          @if (muscles().length > 0) {
+          <div class="mb-3 flex flex-wrap gap-2" role="group" [attr.aria-label]="'workouts.muscle' | translate">
+            @for (m of muscles(); track m._id) {
+            <button type="button" (click)="selectMuscle(m._id)" [attr.aria-pressed]="selectedMuscleId() === m._id"
+              class="rounded-full border border-[#24242433] px-3 py-1 text-xs font-medium
+                 text-[#242424] transition hover:border-[#FF4100]
+                 dark:border-[#F3F3F433] dark:text-[#F3F3F4]
+                 aria-pressed:border-[#FF4100] aria-pressed:bg-[#FF4100] aria-pressed:text-white">
+              {{ m.name }}
+            </button>
+            }
+          </div>
+          } @else if (isLoadingMuscles()) {
+          <div class="mb-3 flex flex-wrap gap-2" role="status">
+            <span class="sr-only">{{ 'workouts.loadingWorkouts' | translate }}</span>
+
+            @for (muscle of [1, 2, 3, 4, 5]; track muscle) {
+            <div
+              class="h-7 w-20 animate-pulse rounded-full bg-[#24242412] motion-reduce:animate-none dark:bg-[#F3F3F412]">
+            </div>
+            }
+          </div>
+          } @else if (musclesErrorMessage()) {
+          <p class="py-2 text-center text-sm" role="alert">{{ musclesErrorMessage() | translate }}</p>
+          }
+          <div
+            class="flex max-h-[32rem] min-h-0 flex-1 flex-col rounded-[20px] border border-[#24242414] bg-[#FFFFFF80] px-3 pt-4 pb-2 lg:max-h-none dark:border-[#F3F3F414] dark:bg-[#24242480]">
+            @if (exercisesErrorMessage()) {
+            <p class="py-8 text-center text-[#242424] dark:text-[#F3F3F4]" role="alert">{{ exercisesErrorMessage() |
+              translate }}</p>
+            } @else {
+            <lib-tabbed-list class="flex-1" maxHeight="none" [tabs]="difficultyLevelTabs()"
+              [selectedTabId]="selectedDifficultyLevelId()" [items]="exerciseItems()" [loading]="isExercisesViewLoading()"
+              [loadingText]="'workouts.loadingExercises' | translate" [emptyText]="'workouts.noExercises' | translate"
+              (tabSelected)="selectDifficultyLevel($event)">
+              <ng-template #item let-item>
+                <div class="flex items-center gap-1">
+                  <button type="button" (click)="selectExercise(item)"
+                    [attr.aria-current]="item.id === selectedExercise()?._id || null"
+                    class="flex min-w-0 flex-1 cursor-pointer items-center gap-4 rounded-xl px-2 py-4 text-start transition-colors hover:bg-[#2424240a] dark:hover:bg-[#F3F3F40a]"
+                    [class.bg-[#FF41001a]]="item.id === selectedExercise()?._id">
+                    @if (item.image) {
+                    <img [src]="item.image" [alt]="item.title" loading="lazy"
+                      class="h-[72px] w-[72px] shrink-0 rounded-[14px] object-cover" />
+                    }
+                    <span class="flex min-w-0 flex-col gap-1">
+                      <span class="truncate text-base font-semibold capitalize text-[#242424] dark:text-[#F3F3F4]"
+                        [class.text-[#FF4100]]="item.id === selectedExercise()?._id">
+                        {{ item.title }}
+                      </span>
+                      <span class="line-clamp-2 text-xs leading-snug text-[#242424b3] dark:text-[#F3F3F4b3]">
+                        {{ item.lines?.[0] }}
+                      </span>
+                    </span>
+                  </button>
+                  <button type="button" (click)="selectExercise(item)" [attr.aria-label]="item.title"
+                    class="grid h-8 w-8 shrink-0 cursor-pointer place-items-center rounded-full bg-[#FF4100] text-[#242424] transition-transform duration-200 hover:scale-110 rtl:-scale-x-100">
+                    <svg width="8" height="10" viewBox="0 0 8 10" fill="currentColor" aria-hidden="true">
+                      <path d="M0 0.8v8.4c0 .6.7 1 1.2.6l6.3-4.2c.4-.3.4-1 0-1.3L1.2.2C.7-.1 0 .2 0 .8Z" />
+                    </svg>
+                  </button>
+                </div>
+              </ng-template>
+            </lib-tabbed-list>
+            }
+          </div>
+        </div>
+      </aside>
+
+      <div class="order-1 flex min-w-0 flex-col gap-6 lg:col-start-2 lg:row-start-1 pe-[clamp(1rem,5.56vw,5rem)]">
+        <!-- workout-player -->
+        <div class="relative w-full min-w-0 aspect-video overflow-hidden rounded-[20px] bg-[#E5E5E7] dark:bg-[#303030]">
+
+          @if (selectedExercise(); as exercise) {
+          <app-workout-player class="block h-full w-full" [title]="exercise.exercise"
+             [exerciseId]="exercise._id" [level]="exercise.difficulty_level"
+            />
+          } @else {
+          <div class="absolute inset-0 animate-pulse bg-[#E5E5E7] motion-reduce:animate-none dark:bg-[#303030]"
+            role="status">
+            <span class="sr-only">
+              {{ 'workouts.loadingExercises' | translate }}
+            </span>
+          </div>
+          }
+
+        </div>
+
+        <!-- Expertly designed workout. -->
+        <div class="hidden md:block">
+          <app-workout-highlights />
+        </div>
+
+
+      </div>
+
+      <!-- Recommendation For You  -->
+      <section class="order-3 min-w-0 lg:col-start-2 lg:row-start-2" aria-labelledby="recommendations-title">
+        <div class="mx-auto w-full max-w-[1490px] flex flex-col gap-4">
+          <h2 id="recommendations-title" class="font-['Baloo_Thambi_2'] font-medium capitalize leading-[1.4] tracking-normal
+           text-[clamp(1.25rem,1rem+1.1vw,2rem)] dark:text-[#f3f3f4] text-[#242424]">
+            {{ 'workouts.recommendationForYou' | translate }}
+          </h2>
+
+          @if (isLoadingRecommendations()) {
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" role="status">
+            <span class="sr-only">{{ 'healthy.loading' | translate }}</span>
+            @for (card of [1, 2, 3]; track card) {
+            <app-skeleton-loader-card />
+            }
+          </div>
+          } @else if (recommendationsErrorMessage()) {
+          <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
+            {{ recommendationsErrorMessage() | translate }}
+          </p>
+          } @else if (mealCategories().length > 0) {
+          <app-owl-carousel [items]="mealCategories()" [options]="recommendationCarouselOptions()"
+            [itemId]="getMealCategoryId" [rows]="1">
+            <ng-template #slide let-category>
+              <app-info-card [image]="category.strCategoryThumb" [title]="category.strCategory"
+                buttonText="healthy.readMore" />
+            </ng-template>
+          </app-owl-carousel>
+          } @else {
+          <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]">
+            {{ 'healthy.empty' | translate }}
+          </p>
+          }
+        </div>
+      </section>
+    </div>
+
+  </div>
+
+</main>

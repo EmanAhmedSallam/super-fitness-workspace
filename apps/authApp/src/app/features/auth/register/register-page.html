@@ -1,0 +1,37 @@
+<main class="auth-page">
+  <div class="auth-area">
+    <lib-auth-header [eyebrow]="eyebrow()" [title]="title()" />
+
+    <section class="auth-card">
+      @if (user(); as registered) {
+      <div class="auth-success">
+        <span class="auth-success-badge" aria-hidden="true">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m5 12 5 5L20 7" />
+          </svg>
+        </span>
+
+        <h2>{{ 'auth.register.success.welcome' | translate: { name: registered.firstName } }}</h2>
+        <p>{{ 'auth.register.success.ready' | translate }}</p>
+
+        <a class="auth-link auth-link--strong" routerLink="../login">{{
+          'auth.register.success.goToLogin' | translate
+        }}</a>
+      </div>
+      } @else {
+      <ng-container
+        *ngComponentOutlet="step().component; inputs: stepInputs()"
+      />
+      }
+    </section>
+  </div>
+</main>

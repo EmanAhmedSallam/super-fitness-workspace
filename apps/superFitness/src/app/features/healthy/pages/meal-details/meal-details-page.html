@@ -1,0 +1,116 @@
+<main class="meal-details-page relative flex min-h-screen w-full flex-col items-center overflow-clip pt-[72px] pb-12">
+  <div class="pointer-events-none absolute inset-0 z-0 bg-[#FFFFFF99] dark:bg-[#242424CC] backdrop-blur-[43px]">
+  </div>
+
+  <section
+    class="relative z-10 mx-auto grid w-[min(var(--page-width),calc(100%_-_var(--page-gutter)*2))] gap-8 pt-6 sm:pt-8 lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)] xl:grid-cols-[minmax(0,360px)_minmax(0,1fr)]">
+
+    <aside class="order-2 flex min-w-0 flex-col lg:sticky lg:top-[72px] lg:order-1 lg:h-[calc(100dvh-72px)] lg:self-start lg:pb-6">
+      <div class="flex min-h-0 flex-1 flex-col">
+        <div
+          class="flex max-h-[32rem] min-h-0 flex-1 flex-col rounded-[20px] border border-[#24242414] bg-[#FFFFFF80] px-3 pt-4 pb-2 lg:max-h-none dark:border-[#F3F3F414] dark:bg-[#24242480]">
+          <lib-tabbed-list class="flex-1" maxHeight="none" [tabs]="categoryTabs()"
+            [selectedTabId]="selectedCategory()" [items]="mealItems()" [loading]="isLoadingMeals()"
+            [loadingText]="'healthy.loadingMeals' | translate" [emptyText]="'healthy.emptyMeals' | translate"
+            (tabSelected)="selectCategory($event)">
+            <ng-template #item let-item>
+              <button type="button" (click)="openMeal(item)" [attr.aria-current]="item.id === meal()?.idMeal || null"
+                class="flex w-full cursor-pointer items-center gap-4 rounded-xl px-2 py-4 text-start transition-colors hover:bg-[#2424240a] dark:hover:bg-[#F3F3F40a]"
+                [class.bg-[#FF41001a]]="item.id === meal()?.idMeal">
+                <img [src]="item.image" [alt]="item.title" loading="lazy"
+                  class="h-[72px] w-[72px] shrink-0 rounded-[14px] object-cover" />
+                <span class="flex min-w-0 flex-col gap-1">
+                  <span class="truncate text-base font-semibold capitalize text-[#242424] dark:text-[#F3F3F4]"
+                    [class.text-[#FF4100]]="item.id === meal()?.idMeal">
+                    {{ item.title }}
+                  </span>
+                  <span class="line-clamp-2 text-xs leading-snug text-[#242424b3] dark:text-[#F3F3F4b3]">
+                    {{ 'healthy.details.itemDescription' | translate: { category: selectedCategory() } }}
+                  </span>
+                </span>
+              </button>
+            </ng-template>
+          </lib-tabbed-list>
+        </div>
+      </div>
+    </aside>
+    <article class="order-1 flex min-w-0 flex-col gap-8 lg:order-2">
+      <lib-section-title class="-mb-12" [primaryText]="'healthy.title' | translate" [showIcon]="false" size="sm"
+        [primaryTextFontSize]="64" labelAlign="center" />
+      @if (isLoadingMeal()) {
+      <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
+        {{ 'healthy.details.loading' | translate }}
+      </p>
+      } @else if (errorMessage()) {
+      <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
+        {{ errorMessage() | translate }}
+      </p>
+      } @else if (meal(); as meal) {
+
+      <div
+        class="relative flex flex-col overflow-hidden rounded-[20px] bg-[#F3F3F4] shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:bg-[#242424]">
+        <div class="relative aspect-[4/3] w-full sm:aspect-[16/9]">
+          <img [src]="meal.strMealThumb" [alt]="meal.strMeal"
+            class="absolute inset-0 h-full w-full object-cover [mask-image:linear-gradient(to_bottom,#000_45%,transparent_100%)]" />
+
+          @if (meal.strYoutube) {
+          <a  target="_blank" rel="noopener noreferrer"
+            [attr.aria-label]="'healthy.details.watchVideo' | translate"
+            class="absolute end-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-[#FF4100] text-[#F3F3F4] transition-transform duration-200 hover:scale-110">
+            <svg width="12" height="14" viewBox="0 0 8 10" fill="currentColor" aria-hidden="true">
+              <path d="M0 0.8v8.4c0 .6.7 1 1.2.6l6.3-4.2c.4-.3.4-1 0-1.3L1.2.2C.7-.1 0 .2 0 .8Z" />
+            </svg>
+          </a>
+          }
+        </div>
+
+        <div class="relative -mt-16 flex flex-col gap-4 px-4 pb-5 sm:-mt-24 sm:gap-5 sm:px-8 sm:pb-8">
+          <h1
+            class="m-0 text-center text-[28px] font-medium leading-tight text-[#242424] sm:text-[36px] lg:text-[40px] dark:text-[#F3F3F4]">
+            {{ meal.strMeal }}
+          </h1>
+
+          @if (instructions().length > 0) {
+          <p
+            class="m-0 line-clamp-4 text-sm leading-[1.6] text-[#242424cc] sm:line-clamp-3 sm:max-w-[80%] sm:text-[15px] dark:text-[#F3F3F4cc]">
+            {{ instructions().join(' ') }}
+          </p>
+          }
+
+          <ul class="m-0 grid list-none grid-cols-2 gap-3 p-0 sm:flex sm:items-center sm:justify-between">
+            @for (stat of stats(); track stat.label) {
+            <li
+              class="flex min-w-[72px] flex-col items-center rounded-[12px] border border-[#24242433] px-3 py-1.5 text-center dark:border-[#F3F3F44d]">
+              <span
+                class="max-w-[9rem] truncate text-xs uppercase leading-snug text-[#242424] dark:text-[#F3F3F4]">{{ stat.value }}</span>
+              <span class="text-xs font-bold leading-snug text-[#FF4100]">{{ stat.label | translate }}</span>
+            </li>
+            }
+          </ul>
+        </div>
+      </div>
+
+      @if (ingredients().length > 0) {
+      <div class="flex flex-col gap-4">
+        <h2 class="m-0 text-2xl font-medium text-[#242424] sm:text-[28px] dark:text-[#F3F3F4]">
+          {{ 'healthy.details.ingredients' | translate }}
+        </h2>
+        <ul
+          class="m-0 grid list-none gap-x-12 rounded-[20px] bg-[#FFFFFF80] px-4 py-2 sm:grid-cols-2 sm:px-6 dark:bg-[#24242480]">
+          @for (ingredient of ingredients(); track $index) {
+          <li
+            class="flex items-center justify-between gap-4 border-b border-[#2424241a] py-3 text-sm dark:border-[#F3F3F41a]">
+            <span class="font-semibold capitalize text-[#242424] dark:text-[#F3F3F4]">{{ ingredient.name }}</span>
+            <span class="shrink-0 text-end text-[#FF4100]">{{ ingredient.measure }}</span>
+          </li>
+          }
+        </ul>
+      </div>
+      }
+
+
+      }
+    </article>
+  </section>
+
+</main>

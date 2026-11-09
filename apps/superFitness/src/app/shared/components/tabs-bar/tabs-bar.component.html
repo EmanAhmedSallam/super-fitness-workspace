@@ -1,0 +1,24 @@
+<div class="my-8 mx-auto flex justify-center" [class]="widthClass()">
+  <div
+    class="tabs-bar flex max-w-full items-center gap-2  rounded-[20px] overflow-x-auto px-2 pb-2 whitespace-nowrap sm:gap-4 lg:gap-6"
+    role="tablist"
+  >
+    @for (tab of tabs(); track tab.id) {
+      <button
+        type="button"
+        role="tab"
+        [attr.aria-selected]="selectedId() === tab.id"
+        (click)="select(tab.id, $event)"
+        class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-[20px] px-4
+               text-sm font-bold capitalize transition-colors duration-200 sm:h-9 sm:text-base"
+        [class]="
+          selectedId() === tab.id
+            ? 'bg-[#FF4100] text-[#F3F3F4]'
+            : 'bg-transparent text-[#242424] dark:text-[#D3D3D3]'
+        "
+      >
+        {{ tab.label }}
+      </button>
+    }
+  </div>
+</div>

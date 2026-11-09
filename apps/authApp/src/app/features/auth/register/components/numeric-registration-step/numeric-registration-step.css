@@ -1,0 +1,109 @@
+/*
+ * Styles for the reusable numeric onboarding step.
+ *
+ * Inherits the auth design tokens (--auth-accent, --auth-font) from the
+ * auth layout which wraps it.  The layout itself sits inside
+ * AuthLayoutComponent, so no background is painted here.
+ */
+
+:host {
+  --u: clamp(0.85px, calc(100vw / 430), 1px);
+  --auth-accent: #ff4100;
+  --auth-font: 'Baloo 2', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  display: block;
+  width: 100%;
+  color: #fff;
+  font-family: var(--auth-font);
+  color-scheme: dark;
+}
+
+@media (min-width: 56rem) {
+  :host {
+    --u: clamp(0.78px, min(100vw / 1440, 100dvh / 1042), 1.35px);
+  }
+}
+
+/* ── Outer page wrapper (fills the router-outlet column) ──────────────── */
+
+.nrs-page {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+}
+
+/* ── Centred content column ────────────────────────────────────────────── */
+
+.nrs-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: calc(420 * var(--u));
+  margin: auto;
+  gap: calc(18 * var(--u));
+  text-align: center;
+  padding-block: calc(20 * var(--u));
+}
+
+/* ── Progress ring ──────────────────────────────────────────────────────── */
+
+.nrs-progress {
+  --stp-size: calc(62 * var(--u));
+}
+
+/* ── Wheel area ─────────────────────────────────────────────────────────── */
+
+.nrs-wheel {
+  width: 100%;
+  padding-block: calc(10 * var(--u));
+}
+
+/* ── Primary CTA button ─────────────────────────────────────────────────── */
+
+.nrs-btn {
+  width: 100%;
+  max-width: calc(320 * var(--u));
+  min-height: max(44px, calc(50 * var(--u)));
+  padding: 0 2rem;
+  background: var(--auth-accent, #ff4100);
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  font-family: inherit;
+  font-size: max(14px, calc(16 * var(--u)));
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease,
+    opacity 0.15s ease;
+}
+
+.nrs-btn:hover {
+  background: #e83b00;
+}
+
+.nrs-btn:active {
+  transform: scale(0.975);
+}
+
+.nrs-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Smooth entrance animation (respects reduced-motion preference) */
+@media (prefers-reduced-motion: no-preference) {
+  .nrs-content {
+    animation: nrs-rise 0.4s ease-out both;
+  }
+
+  @keyframes nrs-rise {
+    from {
+      opacity: 0;
+      translate: 0 0.6rem;
+    }
+  }
+}

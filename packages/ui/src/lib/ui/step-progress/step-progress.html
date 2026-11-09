@@ -1,0 +1,7 @@
+<svg class="stp-ring" viewBox="0 0 56 56" aria-hidden="true">
+  <circle class="stp-ring__bg" cx="28" cy="28" r="22" />
+  <circle class="stp-ring__arc" cx="28" cy="28" r="22" [attr.stroke-dashoffset]="dashOffset()" />
+</svg>
+<span class="stp-label" [attr.aria-label]="'ui.stepProgress.label' | translate: { current: current(), total: total() }">
+  {{ current() }}<span class="stp-sep" aria-hidden="true">/</span>{{ total() }}
+</span>

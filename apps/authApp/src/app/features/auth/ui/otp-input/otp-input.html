@@ -1,0 +1,25 @@
+<!-- Codes are typed left-to-right in every language, so the cells never mirror. -->
+<div
+  dir="ltr"
+  class="flex justify-center gap-[calc(14*var(--u,1px))]"
+  role="group"
+  [attr.aria-label]="label() || ('auth.otp.label' | translate)"
+>
+  @for (digit of cells(); track $index) {
+    <input
+      #cell
+      class="otp-cell box-border h-[max(40px,calc(50*var(--u,1px)))] w-[max(34px,calc(44*var(--u,1px)))] rounded-none border-0 border-b-2 border-b-white/[0.62] bg-transparent p-0 text-center text-[length:max(20px,calc(26*var(--u,1px)))] font-semibold text-[color:var(--auth-accent,#ff4100)] caret-[color:var(--auth-accent,#ff4100)] outline-none transition-colors duration-150 ease-in-out focus:border-b-[color:var(--auth-accent,#ff4100)] data-filled:border-b-[color:var(--auth-accent,#ff4100)] aria-invalid:border-b-[#ff7a5c]! disabled:opacity-60"
+      [attr.data-filled]="digit ? '' : null"
+      [value]="digit"
+      [disabled]="disabled()"
+      [attr.aria-label]="'auth.otp.digit' | translate: { index: $index + 1, length: length() }"
+      [attr.aria-invalid]="invalid() || null"
+      [attr.autocomplete]="$index === 0 ? 'one-time-code' : 'off'"
+      inputmode="numeric"
+      (input)="onInput($index, $event)"
+      (keydown)="onKeydown($index, $event)"
+      (paste)="onPaste($index, $event)"
+      (focus)="select($index)"
+    />
+  }
+</div>

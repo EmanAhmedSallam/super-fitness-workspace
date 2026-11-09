@@ -1,0 +1,12 @@
+<owl-carousel-o [options]="carouselOptions()" (wheel)="onWheel($event)">
+  @for (group of slides(); track slideId(group)) {
+  <ng-template carouselSlide [id]="slideId(group)">
+    <div class="slide-group" [style.--rows]="rows()">
+      @for (item of group; track itemId()(item)) {
+      <ng-container [ngTemplateOutlet]="slideTemplate" 
+      [ngTemplateOutletContext]="{ $implicit: item }" />
+      }
+    </div>
+  </ng-template>
+  }
+</owl-carousel-o>

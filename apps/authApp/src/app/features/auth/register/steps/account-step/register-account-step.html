@@ -1,0 +1,30 @@
+<h2 class="auth-title">{{ 'auth.register.account.heading' | translate }}</h2>
+
+<app-auth-feedback [errors]="stepper.errors()" [notice]="notice()" />
+
+<lib-dynamic-form
+  class="auth-form"
+  [fields]="fields()"
+  [initialData]="stepper.draft()"
+  [submitting]="stepper.submitting()"
+  [disableSubmitWhenInvalid]="false"
+  [submitLabel]="'auth.register.account.submit' | translate"
+  (formSubmit)="onSubmit($event)"
+>
+  <div formBeforeSubmit>
+    <div class="auth-row-end">
+      <a class="auth-link auth-link--strong" routerLink="/auth/forgot-password">
+        {{ 'auth.login.forgotPassword' | translate }}
+      </a>
+    </div>
+
+    <app-social-sign-in (providerSelected)="onUnavailable($event)" />
+  </div>
+
+  <p formAfterSubmit class="auth-footnote">
+    {{ 'auth.register.account.loginPrompt' | translate }}
+    <a class="auth-link auth-link--strong" routerLink="/auth/login">{{
+      'auth.register.account.loginLink' | translate
+    }}</a>
+  </p>
+</lib-dynamic-form>

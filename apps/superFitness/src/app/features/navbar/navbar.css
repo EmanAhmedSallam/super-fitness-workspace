@@ -1,0 +1,290 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  padding: 0 max(var(--page-gutter), calc((100% - var(--page-width)) / 2));
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.navbar.scrolled {
+  background: rgb(239 241 239 / 92%);
+  box-shadow: 0 4px 20px rgb(35 40 39 / 10%);
+  backdrop-filter: blur(10px);
+}
+
+/* Logo */
+.logo-link {
+  display: inline-flex;
+  border-radius: 12px;
+  transition: transform 0.25s;
+}
+
+.logo-link:hover {
+  transform: scale(1.06);
+}
+
+.logo-link:active {
+  transform: scale(0.95);
+}
+
+.logo {
+  width: 72px;
+  display: block;
+}
+
+/* Links */
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.links {
+  display: none;
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  padding: 6px 0;
+  color: #292a2b;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+
+
+
+.link:hover,
+.link.active {
+  color: #ff4100;
+}
+
+.link:hover::after,
+.link.active::after {
+  transform: scaleX(1);
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.actions > lib-language-switcher,
+.actions > lib-theme-toggle,
+.actions > lib-site-button {
+  display: none;
+}
+
+.btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: #ff4100;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgb(255 65 0 / 35%);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgb(255 65 0 / 50%);
+}
+
+/* Mobile drawer */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  border: 0;
+  background: transparent;
+  animation: fade-in 0.25s;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  inset-inline-start: 0;
+  z-index: 70;
+  width: min(278px, calc(100vw - 48px));
+  padding: 14px 13px 12px;
+  background: #e7e9e7;
+  box-shadow: 8px 8px 28px rgb(32 38 37 / 12%);
+  animation: slide-in 0.3s ease-out;
+}
+
+.drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drawer-links .link {
+  padding: 4px 0;
+  color: #292a2b;
+  font-size: 20px;
+}
+
+.drawer-links .link:hover,
+.drawer-links .link.active {
+  color: #ff4100;
+}
+
+.drawer-controls {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+.drawer-controls .drawer-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: start;
+  cursor: pointer;
+}
+
+.drawer-control-value {
+  color: #ff4100;
+}
+
+.drawer-controls .drawer-control:first-child {
+  border-top: 1px solid rgb(41 42 43 / 15%);
+}
+
+.drawer-controls .drawer-auth-action {
+  justify-content: flex-start;
+  margin-top: 4px;
+  border-top: 1px solid rgb(41 42 43 / 15%);
+}
+
+.drawer-controls .drawer-login {
+  color: #ff4100;
+}
+
+.drawer-controls .drawer-logout {
+  color: #dc2626;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-in-rtl {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+/* RTL: the drawer opens from the right edge, so mirror its slide-in and shadow */
+:host-context([dir='rtl']) .drawer {
+  box-shadow: -8px 8px 28px rgb(32 38 37 / 12%);
+  animation-name: slide-in-rtl;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Tablet and up: show links in the bar, hide the menu button */
+@media (min-width: 768px) {
+  .logo {
+    width: 80px;
+  }
+
+  .links {
+    display: flex;
+    gap: 40px;
+  }
+
+  .menu-btn {
+    display: none;
+  }
+
+  .actions > lib-language-switcher,
+  .actions > lib-theme-toggle,
+  .actions > lib-site-button {
+    display: inline-flex;
+  }
+
+  .drawer-controls {
+    display: none;
+  }
+
+  .drawer,
+  .backdrop {
+    display: none;
+  }
+}
+
+/* @media (max-width: 767px) {
+  .actions > .btn:not(.menu-btn) {
+    display: none;
+  }
+} */
+
+/* Dark mode */
+:host-context(.dark) .navbar.scrolled {
+  background: rgb(36 36 36 / 92%);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 40%);
+}
+
+:host-context(.dark) .link,
+:host-context(.dark) .drawer-links .link {
+  color: #f3f3f4;
+}
+
+:host-context(.dark) .link:hover,
+:host-context(.dark) .link.active {
+  color: #ff4100;
+}
+
+:host-context(.dark) .drawer {
+  background: #1e1e1e;
+  box-shadow: 8px 8px 28px rgb(0 0 0 / 45%);
+}
+
+:host-context(.dark) .drawer-controls .drawer-control:first-child {
+  border-top-color: rgb(243 243 244 / 20%);
+}
+
+:host-context(.dark) .drawer-controls .drawer-auth-action {
+  border-top-color: rgb(243 243 244 / 20%);
+}
+
+:host-context(.dark[dir='rtl']) .drawer {
+  box-shadow: -8px 8px 28px rgb(0 0 0 / 45%);
+}

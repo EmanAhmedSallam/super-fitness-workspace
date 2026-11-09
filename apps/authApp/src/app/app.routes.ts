@@ -1,9 +1,15 @@
-import { Route } from '@angular/router';
+import { Routes } from '@angular/router';
 
-export const appRoutes: Route[] = [
+export const routes: Routes = [
   {
-    path: '',
-    loadChildren: () =>
-      import('./remote-entry/entry.routes').then((m) => m.remoteRoutes),
+    path: 'auth',
+    loadChildren: () => import('./features/auth/auth.routes').then((m) => m.AUTH_ROUTES),
+  },
+  {
+    path: '**',
+    redirectTo: 'auth/login',
+    pathMatch: 'full',
   },
 ];
+
+export const appRoutes = routes;

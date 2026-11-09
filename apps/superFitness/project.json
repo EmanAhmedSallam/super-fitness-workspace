@@ -4,11 +4,15 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/superFitness/src",
-  "tags": ["type:app"],
+  "tags": [
+    "type:app"
+  ],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/superFitness",
@@ -20,9 +24,33 @@
           {
             "glob": "**/*",
             "input": "apps/superFitness/public"
+          },
+          {
+            "glob": "hero.png",
+            "input": "apps/authApp/public/assets/auth",
+            "output": "assets/auth"
+          },
+          {
+            "glob": "{logo,background}.png",
+            "input": "apps/authApp/public/assets/auth",
+            "output": "assets/auth"
+          },
+          {
+            "glob": "*.json",
+            "input": "apps/shell/public/assets/i18n/shell",
+            "output": "assets/i18n/shell"
+          },
+          {
+            "glob": "*.woff2",
+            "input": "apps/shell/public/assets/fonts",
+            "output": "assets/fonts"
           }
         ],
-        "styles": ["apps/superFitness/src/styles.scss"],
+        "styles": [
+          "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+          "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
+          "apps/superFitness/src/styles.css"
+        ],
         "customWebpackConfig": {
           "path": "apps/superFitness/webpack.config.ts"
         }
@@ -62,7 +90,10 @@
       "defaultConfiguration": "development",
       "options": {
         "port": 4202,
-        "publicHost": "http://localhost:4202"
+        "publicHost": "http://localhost:4202",
+        "headers": {
+          "Access-Control-Allow-Origin": "*"
+        }
       },
       "configurations": {
         "production": {
@@ -72,7 +103,6 @@
           "buildTarget": "superFitness:build:development"
         }
       },
-      "dependsOn": ["shell:serve"]
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

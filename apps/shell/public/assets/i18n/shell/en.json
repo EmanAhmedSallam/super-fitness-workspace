@@ -1,0 +1,44 @@
+{
+  "app": {
+    "name": "Super Fitness"
+  },
+  "form": {
+    "requiredMessage": "{{label}} is required",
+    "selectPlaceholder": "Select",
+    "submit": "Add",
+    "submitting": "Submitting...",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "upload": {
+      "uploadFile": "Upload file",
+      "view": "View {{label}}",
+      "tooLarge": "Too large, not added: {{files}}"
+    }
+  },
+  "ui": {
+    "theme": {
+      "label": "Mode",
+      "light": "Light",
+      "dark": "Dark",
+      "switchToLight": "Switch to light mode",
+      "switchToDark": "Switch to dark mode"
+    },
+    "language": {
+      "label": "Language",
+      "english": "English",
+      "arabic": "Arabic",
+      "switchToArabic": "Switch language to Arabic",
+      "switchToEnglish": "Switch language to English"
+    },
+    "stepProgress": {
+      "label": "Step {{current}} of {{total}}"
+    },
+    "gallery": {
+      "close": "Close",
+      "previous": "Previous image",
+      "next": "Next image",
+      "showImage": "Show image {{index}}",
+      "imageAlt": "Uploaded image"
+    }
+  }
+}

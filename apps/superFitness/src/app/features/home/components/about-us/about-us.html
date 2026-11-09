@@ -1,0 +1,85 @@
+<section class="mx-auto grid w-[min(var(--page-width),calc(100%_-_var(--page-gutter)*2))] grid-cols-[minmax(320px,0.92fr)_minmax(0,1.08fr)] items-center gap-[clamp(42px,6vw,86px)] py-[76px] pb-[84px] max-[800px]:grid-cols-1 max-[800px]:gap-9 max-[800px]:py-12" aria-labelledby="about-title">
+  <div
+    libIntersectionObserverDirective
+    [observeOnce]="true"
+    [rootMargin]="'0px 0px -50px 0px'"
+    (visibilityChange)="onGalleryVisible($event.isIntersecting)"
+    class="relative min-h-[500px] max-[800px]:min-h-[min(115vw,480px)]"
+    [attr.aria-label]="'landing.aboutUs.galleryLabel' | translate"
+  >
+    <img
+      [class.opacity-100]="galleryVisible()"
+      [class.opacity-0]="!galleryVisible()"
+      [class.translate-x-0]="galleryVisible()"
+      [class.-translate-x-8]="!galleryVisible()"
+      class="absolute start-0 top-0 bottom-[25%] block h-3/4 w-[62%] rounded-[13px] object-cover opacity-0 -translate-x-8 shadow-[0_18px_40px_rgb(24_31_35_/_10%)] transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100 dark:shadow-[0_18px_40px_rgb(0_0_0_/_45%)]"
+      src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=85"
+      [alt]="'landing.aboutUs.images.kettlebell' | translate"
+    />
+    <img
+      [class.opacity-100]="galleryVisible()"
+      [class.opacity-0]="!galleryVisible()"
+      [class.translate-y-0]="galleryVisible()"
+      [class.translate-y-8]="!galleryVisible()"
+      class="absolute end-0 top-[11%] block h-[28%] w-[40%] rounded-[13px] object-cover opacity-0 translate-y-8 shadow-[0_18px_40px_rgb(24_31_35_/_10%)] transition-[opacity,transform] duration-700 delay-100 ease-out motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100 dark:shadow-[0_18px_40px_rgb(0_0_0_/_45%)]"
+      src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=600&q=85"
+      [alt]="'landing.aboutUs.images.strength' | translate"
+    />
+    <img
+      [class.opacity-100]="galleryVisible()"
+      [class.opacity-0]="!galleryVisible()"
+      [class.translate-x-0]="galleryVisible()"
+      [class.translate-x-8]="!galleryVisible()"
+      class="absolute start-[34%] end-0 bottom-0 block h-[61%] w-[63%] rounded-[13px] object-cover opacity-0 translate-x-8 shadow-[0_18px_40px_rgb(24_31_35_/_10%)] transition-[opacity,transform] duration-700 delay-200 ease-out motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100 dark:shadow-[0_18px_40px_rgb(0_0_0_/_45%)]"
+      src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=85"
+      [alt]="'landing.aboutUs.images.studio' | translate"
+    />
+  </div>
+  <div
+    libIntersectionObserverDirective
+    [observeOnce]="true"
+    [rootMargin]="'0px 0px -50px 0px'"
+    (visibilityChange)="onTextVisible($event.isIntersecting)"
+    class="relative"
+  >
+    <lib-section-title
+      [primaryText]="'landing.aboutUs.sectionPrimary' | translate"
+      [secondaryText]="'landing.aboutUs.sectionSecondary' | translate"
+      size="sm"
+      padding="0"
+      [class.opacity-100]="textVisible()"
+      [class.opacity-0]="!textVisible()"
+      [class.translate-y-0]="textVisible()"
+      [class.translate-y-6]="!textVisible()"
+      class="w-fit opacity-0 translate-y-6 transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100"
+    />
+    <lib-paragraph-title
+      id="about-title"
+      [segments]="[
+        { text: 'landing.aboutUs.titlePrefix' | translate },
+        { text: 'landing.aboutUs.titleHighlight' | translate, highlight: true },
+        { text: 'landing.aboutUs.titleSuffix' | translate }
+      ]"
+      [class.opacity-100]="textVisible()"
+      [class.opacity-0]="!textVisible()"
+      [class.translate-y-0]="textVisible()"
+      [class.translate-y-6]="!textVisible()"
+      class="relative my-[28px] mb-[18px] block max-w-[610px] uppercase opacity-0 translate-y-6 transition-[opacity,transform] duration-700 delay-150 ease-out motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100"
+    />
+    <lib-paragraph-description
+      [text]="'landing.aboutUs.description' | translate"
+      class="block max-w-[640px]"
+    />
+    <div class="my-[26px] mb-[25px] grid grid-cols-2 max-[480px]:grid-cols-1">
+      @for (benefit of benefits; track benefit.title) {
+        <article class="flex gap-[13px] border-b border-[#e5e6e6] dark:border-[#3a3a3a] py-[18px] pe-[14px] pb-[17px] odd:pe-[22px] even:ps-4 max-[480px]:even:ps-0">
+          <svg class="size-[35px] shrink-0 rtl:-scale-x-100" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g [attr.clip-path]="'url(#benefit-arrow-clip-' + $index + ')' "><path fill-rule="evenodd" clip-rule="evenodd" d="M22.6872 11.1455C20.9633 12.8694 17.8844 12.9329 16.2287 11.2772L15.5499 10.5984L14.1357 12.0126L14.8145 12.6914C16.0188 13.8957 17.6984 14.4751 19.3914 14.4413L10.6664 23.1663L12.024 24.5239L20.749 15.7989C20.7152 17.4918 21.2946 19.1715 22.4988 20.3757L23.1777 21.0546L24.5919 19.6404L23.9131 18.9615C22.2574 17.3059 22.3209 14.227 24.0449 12.5031L24.752 11.796L23.3943 10.4383L22.6872 11.1455Z" fill="#FF4100" /></g><defs><clipPath [attr.id]="'benefit-arrow-clip-' + $index"><rect width="25" height="24" fill="white" transform="translate(0 17.6776) rotate(-45)" /></clipPath></defs></svg>
+          <div><h2 class="mb-[7px] text-sm font-bold">{{ benefit.title | translate }}</h2><p class="m-0 text-[13px] leading-[1.6] text-[#57595a] dark:text-[#b5b5b5]">{{ benefit.body | translate }}</p></div>
+        </article>
+      }
+    </div>
+    <lib-site-button type="main" [useIcon]="true" padding="10px 26px">
+      {{ 'landing.hero.getStarted' | translate }} <svg siteButtonIcon class="rtl:-scale-x-100" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0206 0.707124C10.2967 2.43105 7.155 2.43175 5.43036 0.707116L4.72326 9.63389e-06L3.30904 1.41422L4.01615 2.12133C5.27056 3.37574 6.99731 4.00223 8.72478 4.00295L-0.000209446 12.7279L1.414 14.1422L10.139 5.41716C10.1397 7.14462 10.7662 8.87138 12.0206 10.1258L12.7277 10.8329L14.1419 9.41868L13.4348 8.71157C11.7102 6.98694 11.7109 3.84526 13.4348 2.12134L14.1419 1.41423L12.7277 1.70517e-05L12.0206 0.707124Z" fill="#F3F3F4" /></svg>
+    </lib-site-button>
+  </div>
+</section>

@@ -1,0 +1,153 @@
+:host {
+  display: block;
+   width: 100%;
+  min-width: 0;
+  position: relative;
+}
+
+  
+:host ::ng-deep .owl-carousel .owl-carousel-inner button.owl-prev,
+:host ::ng-deep .owl-carousel .owl-carousel-inner button.owl-next {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+  background: #ff4100;
+  color: #ffffff;
+  
+
+  transform: translateY(-50%);
+  box-shadow: 0 4px 12px rgb(255 65 0 / 35%);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+
+
+  &:hover:not(.disabled) {
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 6px 16px rgb(255 65 0 / 50%);
+  }
+
+  &:focus-visible {
+    outline: 3px solid rgb(255 65 0 / 35%);
+    outline-offset: 3px;
+  }
+
+  &.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+
+:host ::ng-deep .owl-carousel .owl-carousel-inner button.owl-prev::before,
+:host ::ng-deep .owl-carousel .owl-carousel-inner button.owl-next::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: currentColor;
+  -webkit-mask: var(--arrow) center / contain no-repeat;
+  mask: var(--arrow) center / contain no-repeat;
+}
+
+:host ::ng-deep .owl-carousel .owl-carousel-inner button.owl-prev {
+  --arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 18l-6-6 6-6'/%3E%3C/svg%3E");
+}
+
+:host ::ng-deep .owl-carousel .owl-carousel-inner button.owl-next {
+  --arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
+}
+:host ::ng-deep .owl-carousel .owl-carousel-inner button.owl-prev {
+  left: 8px;
+  right: auto;
+}
+
+:host ::ng-deep .owl-carousel .owl-carousel-inner button.owl-next {
+  right: 8px;
+  left: auto;
+}
+:host-context([dir='rtl']) ::ng-deep .owl-carousel .owl-carousel-inner button.owl-prev {
+  right: 8px;
+  left: auto;
+}
+
+:host-context([dir='rtl']) ::ng-deep .owl-carousel .owl-carousel-inner button.owl-next {
+  left: 8px;
+  right: auto;
+}
+:host-context([dir='rtl']) ::ng-deep .owl-carousel .owl-carousel-inner button.owl-prev::before,
+:host-context([dir='rtl']) ::ng-deep .owl-carousel .owl-carousel-inner button.owl-next::before {
+  transform: scaleX(-1);
+}
+  ::ng-deep .owl-carousel .owl-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 2rem;
+
+    .owl-dot span {
+      display: block;
+      width: 10px;
+      height: 10px;
+      margin: 0;
+      border-radius: 50%;
+      background: #242424;
+      transition: all 0.3s ease;
+    }
+
+    .owl-dot.active span {
+      width: 30px;
+      border-radius: 12px;
+      background: #ff4100;
+      opacity: 1;
+    }
+  }
+
+
+
+:host-context(.dark) ::ng-deep .owl-carousel .owl-dots .owl-dot:not(.active) span {
+  background: #f3f3f4;
+}
+.slide-group {
+  display: grid;
+  grid-template-rows: repeat(var(--rows, 1), auto);
+  gap: 1rem;
+}
+
+/* Arrows outside the slides: reserve a gutter on each side and park the arrows in it.
+   Logical insets keep prev on the start side in both LTR and RTL. */
+:host(.nav-outside) {
+  @media (min-width: 768px) {
+    padding-inline: 56px;
+  }
+}
+
+:host(.nav-outside) ::ng-deep .owl-carousel .owl-carousel-inner button.owl-prev {
+  left: auto;
+  right: auto;
+  inset-inline-start: -56px;
+}
+
+:host(.nav-outside) ::ng-deep .owl-carousel .owl-carousel-inner button.owl-next {
+  left: auto;
+  right: auto;
+  inset-inline-end: -56px;
+}

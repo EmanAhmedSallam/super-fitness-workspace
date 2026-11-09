@@ -12,9 +12,9 @@ export abstract class ApiClient<TEntity> {
   protected abstract readonly endpoint: string;
 
   protected readonly http = inject(HttpClient);
-  private readonly baseUrl = inject(API_BASE_URL);
+  protected readonly baseUrl = inject(API_BASE_URL);
 
-  private get resourceUrl(): string {
+  protected get resourceUrl(): string {
     return `${this.baseUrl}/${this.endpoint}`;
   }
 

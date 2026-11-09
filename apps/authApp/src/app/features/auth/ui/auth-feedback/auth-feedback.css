@@ -1,0 +1,34 @@
+:host {
+  display: block;
+}
+
+.auth-notice,
+.auth-errors {
+  margin: 0 0 1rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.6rem;
+  border-inline-start: 3px solid;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.auth-notice {
+  background: rgb(255 255 255 / 6%);
+  border-inline-start-color: rgb(255 255 255 / 35%);
+  color: #c9ced6;
+}
+
+.auth-errors {
+  background: rgb(220 38 38 / 14%);
+  border-inline-start-color: #ff5a3c;
+  color: #ffc0b2;
+  list-style: none;
+}
+
+.auth-errors li + li {
+  margin-top: 0.3rem;
+}
+
+.auth-errors li::first-letter {
+  text-transform: uppercase;
+}

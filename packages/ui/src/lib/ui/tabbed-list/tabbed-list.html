@@ -1,0 +1,62 @@
+@if (tabs().length > 0) {
+<div class="tabbed-list-scroll flex shrink-0 items-center justify-center gap-2 overflow-x-auto px-2 pb-3 whitespace-nowrap sm:gap-4"
+  role="tablist">
+  @for (tab of tabs(); track tab.id) {
+  <button type="button" role="tab" [attr.aria-selected]="selectedTabId() === tab.id" (click)="selectTab(tab.id, $event)"
+    class="flex h-9 shrink-0 cursor-pointer items-center justify-center rounded-[20px] px-4 text-sm font-bold capitalize transition-colors duration-200 sm:text-base"
+    [class]="selectedTabId() === tab.id
+      ? 'bg-[#FF4100] text-[#F3F3F4]'
+      : 'bg-transparent text-[#242424] hover:text-[#FF4100] dark:text-[#D3D3D3]'">
+    {{ tab.label }}
+  </button>
+  }
+</div>
+}
+
+<div class="tabbed-list-scroll min-h-0 flex-1 overflow-y-auto pe-1" role="tabpanel">
+  @if (loading()) {
+    <div
+    class="my-3 min-h-40 animate-pulse rounded-xl bg-[#2424240A] motion-reduce:animate-none dark:bg-[#F3F3F40A]"
+    role="status"
+    [attr.aria-label]="loadingText()">
+  </div>
+  } @else if (items().length === 0) {
+  <p class="py-8 text-center text-sm text-[#242424] dark:text-[#F3F3F4]">{{ emptyText() }}</p>
+  } @else {
+  <ul class="m-0 list-none p-0">
+    @for (item of items(); track item.id) {
+    <li class="border-b border-[#24242414] last:border-b-0 dark:border-[#F3F3F414]">
+      @if (itemTemplate(); as template) {
+      <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: item }" />
+      } @else {
+      <div class="flex w-full cursor-pointer items-center gap-3 rounded-xl px-2 py-4 transition-colors hover:bg-[#2424240a] dark:hover:bg-[#F3F3F40a]"
+        role="button" tabindex="0" (click)="itemSelected.emit(item)" (keydown.enter)="itemSelected.emit(item)">
+        @if (item.image) {
+        <img [src]="item.image" [alt]="item.title" loading="lazy"
+          class="h-14 w-14 shrink-0 rounded-[10px] object-cover sm:h-16 sm:w-16" />
+        }
+
+        <div class="flex min-w-0 flex-1 flex-col gap-1">
+          <h3 class="m-0 truncate text-sm font-semibold capitalize text-[#242424] sm:text-base dark:text-[#F3F3F4]">
+            {{ item.title }}
+          </h3>
+          @for (line of item.lines ?? []; track $index) {
+          <p class="m-0 line-clamp-2 text-xs leading-snug text-[#242424b3] dark:text-[#F3F3F4b3]">{{ line }}</p>
+          }
+        </div>
+
+        @if (showAction()) {
+        <button type="button" [attr.aria-label]="actionLabel() || item.title" (click)="onAction(item, $event)"
+          class="grid h-6 w-6 shrink-0 cursor-pointer place-items-center rounded-full bg-[#FF4100] text-[#242424] transition-transform duration-200 hover:scale-110 rtl:-scale-x-100">
+          <svg width="8" height="10" viewBox="0 0 8 10" fill="currentColor" aria-hidden="true">
+            <path d="M0 0.8v8.4c0 .6.7 1 1.2.6l6.3-4.2c.4-.3.4-1 0-1.3L1.2.2C.7-.1 0 .2 0 .8Z" />
+          </svg>
+        </button>
+        }
+      </div>
+      }
+    </li>
+    }
+  </ul>
+  }
+</div>

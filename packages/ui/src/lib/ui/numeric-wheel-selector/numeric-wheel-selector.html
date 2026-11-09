@@ -1,0 +1,46 @@
+<div
+  class="nws-track"
+  #track
+  (pointerdown)="onPointerDown($event, track)"
+  (pointermove)="onPointerMove($event)"
+  (pointerup)="onPointerUp()"
+  (pointercancel)="onPointerUp()"
+>
+  @if (unit()) {
+    <p class="nws-unit" aria-hidden="true">{{ unit() }}</p>
+  }
+
+  <!-- Always LTR: drag/keyboard math is physical (left = smaller), so the row must not mirror in RTL. -->
+  <div class="nws-row" role="presentation" dir="ltr">
+    @for (item of items(); track item.offset) {
+      <button
+        type="button"
+        class="nws-item"
+        [class.nws-item--active]="item.offset === 0"
+        [class.nws-item--ghost]="!item.inRange"
+        [style.opacity]="item.inRange ? getOpacity(item.offset) : 0"
+        [style.font-size]="item.inRange ? getFontSize(item.offset) : '0'"
+        [style.font-weight]="item.inRange ? getFontWeight(item.offset) : 400"
+        (click)="pick(item.val)"
+        [tabindex]="-1"
+        [attr.aria-label]="item.inRange ? item.val + ' ' + (unit() ?? '') : null"
+        [attr.aria-pressed]="(item.offset === 0) || null"
+      >
+        {{ item.inRange ? item.val : '\u00A0' }}
+      </button>
+    }
+  </div>
+
+  <!-- Upward-pointing triangle indicator below the selected value -->
+  <div class="nws-indicator" aria-hidden="true">
+    <svg
+      width="14"
+      height="9"
+      viewBox="0 0 14 9"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M7 0L14 9H0L7 0Z" fill="currentColor" />
+    </svg>
+  </div>
+</div>

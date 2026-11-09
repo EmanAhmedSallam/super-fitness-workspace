@@ -1,0 +1,20 @@
+<ng-content select="[authHeaderMedia]" />
+
+@if (eyebrow()) {
+  <p class="auth-header__eyebrow">{{ eyebrow() }}</p>
+}
+
+@switch (headingLevel()) {
+  @case (2) {
+    <h2 class="auth-header__title">{{ title() }}</h2>
+  }
+  @default {
+    <h1 class="auth-header__title">{{ title() }}</h1>
+  }
+}
+
+@if (subtitle()) {
+  <p class="auth-header__subtitle">{{ subtitle() }}</p>
+}
+
+<ng-content />

@@ -1,4 +1,4 @@
 import { Route } from '@angular/router';
-import { TodosPageComponent } from '../features/todos/ui/pages/todos-page.component';
+import { AUTH_ROUTES } from '../features/auth/auth.routes';
 
-export const remoteRoutes: Route[] = [{ path: '', component: TodosPageComponent }];
+export const remoteRoutes: Route[] = [...AUTH_ROUTES];

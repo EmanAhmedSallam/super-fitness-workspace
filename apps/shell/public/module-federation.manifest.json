@@ -1,4 +1,4 @@
 {
-  "authApp": "http://localhost:4201/mf-manifest.json",
-  "superFitness": "http://localhost:4202/mf-manifest.json"
+  "authApp": "http://localhost:4201/remoteEntry.mjs",
+  "superFitness": "http://localhost:4202/remoteEntry.mjs"
 }

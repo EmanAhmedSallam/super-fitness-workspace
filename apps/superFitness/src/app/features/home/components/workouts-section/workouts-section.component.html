@@ -1,0 +1,101 @@
+<section
+  class="workouts-section relative flex min-h-[32rem] sm:min-h-[40rem] lg:min-h-[48rem]
+   w-full  min-w-0  flex-col items-center overflow-hidden bg-[#F3F3F4] px-[max(var(--page-gutter),calc((100%_-_var(--page-width))/2))] pb-8 sm:pb-10">
+
+  <!--  Overlay -->
+  <div
+    class="pointer-events-none absolute inset-x-0 top-[57px] z-0 h-[360px] sm:h-[390px] lg:h-[414px] w-full bg-[#FFFFFFB3] dark:bg-[#24242499] backdrop-blur-[43px]">
+  </div>
+
+
+  <!-- Content -->
+  <div
+  libIntersectionObserverDirective
+    [observeOnce]="true"
+    [rootMargin]="'0px 0px -80px 0px'"
+    (visibilityChange)="onSectionVisible($event.isIntersecting)"
+    [ngClass]="{
+      'opacity-100 translate-y-0': isVisible(),
+      'opacity-0 translate-y-8': !isVisible()
+    }"
+   class="relative z-10 mx-auto w-full min-w-0
+    transition-[opacity,transform] duration-700 ease-out
+      motion-reduce:transition-none">
+
+    @if (isLoading()) {
+    <p class="text-lg text-[#242424] dark:text-[#f3f3f4]">{{ 'workouts.loading' | translate }}</p>
+    } @else {
+    <div class=" w-full min-h-[77px] mx-auto mb-3 sm:mb-5 lg:mb-6">
+      <lib-section-title [primaryText]="'workouts.title' | translate"
+        [secondaryText]="'workouts.subtitle' | translate" size="sm" [primaryTextFontSize]="64" />
+    </div>
+
+    <lib-paragraph-title [segments]="[
+    { text: ('workouts.descriptionPrefix' | translate) },
+    { text: ('workouts.descriptionHighlight' | translate), highlight: true }
+   ]" align="center" />
+
+
+
+    <app-tabs-bar [tabs]=" muscleGroupTabs()"
+     [selectedId]="selectedGroupId()" 
+     (tabSelected)="selectGroup($event)" 
+     widthClass="w-[80%]"/>
+     
+    @if (isLoadingMuscles()) {
+    <div class="grid grid-cols-1 gap-4 py-8 md:grid-cols-2 lg:grid-cols-3" role="status">
+      <span class="sr-only">{{ 'workouts.loadingWorkouts' | translate }}</span>
+      @for (card of [1, 2, 3]; track card) {
+      <app-skeleton-loader-card />
+      }
+    </div>
+    } @else if (errorMessage()) {
+    <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
+      {{ errorMessage() | translate }}
+    </p>
+    } @else if (muscles().length > 0) {
+    <div class="w-full">
+      <div class="grid grid-cols-1 gap-4 md:hidden">
+        @for (muscle of muscles().slice(0, 3); track muscle._id) {
+        <div class="w-full">
+          <app-info-card (buttonClick)="navigateToWorkoutDetails(muscle._id)" [image]="muscle.image" [title]="muscle.name" />
+        </div>
+        }
+      </div>
+      <div class="hidden md:block mx-auto w-full max-w-[1490px]">
+        @if (useCarousel()) {
+        <app-owl-carousel [items]="muscles()" [options]="customOptions()" [itemId]="getMuscleId">
+          <ng-template #slide let-muscle>
+            <app-info-card (buttonClick)="navigateToWorkoutDetails(muscle._id)" [image]="muscle.image" [title]="muscle.name" />
+          </ng-template>
+        </app-owl-carousel>
+        } @else {
+        <div class="flex flex-wrap justify-center gap-4">
+          @for (muscle of muscles(); track muscle._id) {
+          <div class="w-[calc(50%-0.5rem)] max-w-[480px] lg:w-[calc(33.333%-0.75rem)]">
+            <app-info-card (buttonClick)="navigateToWorkoutDetails(muscle._id)" [image]="muscle.image" [title]="muscle.name" />
+          </div>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="mt-auto flex justify-end pt-6 pb-4 md:hidden">
+        <a routerLink="classes" class="rounded-full   py-2
+           text-[13.1px] font-semibold
+           leading-[25.6px] capitalize text-[#FF4100]
+      ">
+          {{ 'workouts.readMore' | translate }}
+        </a>
+      </div>
+    </div>
+    } @else {
+    <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]">
+      {{ 'workouts.empty' | translate }}
+    </p>
+    }
+    }
+
+  </div>
+
+</section>

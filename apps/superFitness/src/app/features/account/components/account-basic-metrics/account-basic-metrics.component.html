@@ -1,0 +1,93 @@
+<section class="mx-auto max-w-[900px]" [attr.aria-label]="'account.title' | translate" [attr.aria-busy]="loading()">
+  @if (loading()) {
+    <p class="text-center" role="status">{{ 'account.loading' | translate }}</p>
+  } @else if (loadError(); as error) {
+    <div class="text-center">
+      <p class="mb-4 text-red-700 dark:text-red-300" role="alert">{{ error | translate }}</p>
+      <lib-site-button (click)="loadProfile()">{{ 'account.retry' | translate }}</lib-site-button>
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 justify-items-center gap-8 sm:grid-cols-3 sm:gap-10">
+      @for (metric of metrics; track metric) {
+        <div class="w-full max-w-[240px] text-center">
+          <h2 [id]="metric + '-title'" class="m-0 text-[28px] font-extrabold leading-tight">{{ ('account.metrics.' + metric) | translate }}</h2>
+          <button #metricTrigger type="button" [id]="metric + '-hint'" [attr.data-metric]="metric"
+            aria-haspopup="dialog" aria-controls="metric-editor" [attr.aria-labelledby]="metric + '-title ' + metric + '-hint'"
+            (click)="openEditor(metric, metricTrigger)"
+            class="mb-4 cursor-pointer rounded-sm text-sm underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#FF4100]">
+            {{ 'account.tapToChange' | translate }}
+          </button>
+          <div [attr.data-metric-value]="metric"
+            class="flex min-h-12 w-full items-center justify-between gap-3 rounded-[20px] border border-[#242424] bg-[#FF4100] px-4 py-3 text-start text-sm font-bold text-[#242424] dark:border-white/60 dark:text-white">
+            <span>
+              <span class="sr-only">{{ ('account.metrics.' + metric) | translate }}: </span>
+              @if (metric === 'weight' && user()?.weight !== undefined && user()?.weight !== null) {
+                {{ user()?.weight }} {{ 'account.unit' | translate }}
+              } @else {
+                {{ labelKey(metric) | translate }}
+              }
+            </span>
+            <lib-field-icon name="refresh" [size]="18" class="text-black dark:text-white" />
+          </div>
+        </div>
+      }
+    </div>
+  }
+</section>
+
+<dialog #editor id="metric-editor" aria-labelledby="metric-editor-title" aria-describedby="metric-editor-description"
+  (close)="onClose()" (cancel)="onCancel($event)"
+  class="fixed inset-0 m-auto max-h-[90dvh] w-[calc(100%_-_2rem)] max-w-[560px] overflow-y-auto rounded-[40px] border-0 bg-[#efefef] p-6 text-[#242424] shadow-2xl backdrop:bg-black/60 sm:p-12 dark:bg-[#242424] dark:text-white">
+  @if (activeMetric(); as metric) {
+    <form (submit)="$event.preventDefault(); save()" [attr.aria-busy]="saving()">
+      <h2 id="metric-editor-title" class="text-center text-3xl font-extrabold leading-tight sm:text-[36px]">
+        {{ ('account.editors.' + metric + '.title') | translate }}
+      </h2>
+      <p id="metric-editor-description" class="mt-2 text-center text-base text-black/70 dark:text-white/75">
+        {{ ('account.editors.' + metric + '.description') | translate }}
+      </p>
+      @if (metric === 'weight') {
+        <div class="my-8" dir="ltr" [attr.inert]="saving() ? '' : null">
+          @let currentWeight = weight();
+          @if (validWeight() && currentWeight !== null) {
+            <lib-numeric-wheel-selector [min]="30" [max]="200" [step]="1" [unit]="'account.unit' | translate"
+              class="[&_.nws-item:not(.nws-item--active)]:text-[#242424] dark:[&_.nws-item:not(.nws-item--active)]:text-white"
+              [value]="currentWeight" (valueChange)="weight.set($event)" />
+          }
+          <label for="account-weight" class="mb-2 block text-center">{{ 'account.metrics.weight' | translate }} ({{ 'account.unit' | translate }})</label>
+          <input id="account-weight" type="number" min="30" max="200" step="1" required
+            [value]="weight() ?? ''" [disabled]="saving()" (input)="setWeight($event)"
+            [attr.aria-invalid]="!validWeight()" aria-describedby="weight-validation"
+            class="mx-auto block w-32 rounded-xl border border-current bg-transparent p-3 text-center focus-visible:outline-2 focus-visible:outline-[#FF4100]" />
+        </div>
+        <p id="weight-validation" class="mb-4 text-center text-sm" [class.text-red-700]="!validWeight()" [class.dark:text-red-300]="!validWeight()">
+          {{ 'account.weightRange' | translate }}
+        </p>
+      } @else {
+        <fieldset class="mx-auto my-8 flex max-w-[330px] flex-col gap-4 disabled:[&_label]:cursor-not-allowed" [disabled]="saving()">
+          <legend class="sr-only">{{ ('account.metrics.' + metric) | translate }}</legend>
+          @for (option of options(); track option.value) {
+            <label class="flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-full border border-black/50 bg-black/10 px-4 py-3 text-sm font-bold focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-[#FF4100] dark:border-white/60 dark:bg-white/15"
+              [class.!border-[#FF4100]]="choice() === option.value" [class.text-[#FF4100]]="choice() === option.value">
+              <span>{{ ('account.options.' + metric + '.' + option.label) | translate }}</span>
+              <input type="radio" name="metric-choice" [value]="option.value" [checked]="choice() === option.value"
+                (change)="choice.set(option.value)" class="size-4 shrink-0 cursor-pointer accent-[#FF4100] disabled:cursor-not-allowed" />
+            </label>
+          }
+        </fieldset>
+      }
+      @if (saveError(); as error) {
+        <p role="alert" class="mb-4 text-center text-sm text-red-700 dark:text-red-300">{{ error | translate }}</p>
+      }
+      <div class="flex flex-wrap justify-center gap-3">
+        <lib-site-button buttonType="submit" padding="10px 56px" [disabled]="!canSave()" class="[&_button:enabled]:cursor-pointer">
+          <span [attr.role]="saving() ? 'status' : null">{{ (saving() ? 'account.saving' : 'account.save') | translate }}</span>
+        </lib-site-button>
+        <button type="button" [disabled]="saving()" (click)="closeEditor()"
+          class="cursor-pointer rounded-full px-6 py-3 font-bold underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF4100] disabled:cursor-not-allowed disabled:opacity-50">
+          {{ 'account.cancel' | translate }}
+        </button>
+      </div>
+    </form>
+  }
+</dialog>

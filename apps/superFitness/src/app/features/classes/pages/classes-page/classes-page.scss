@@ -1,0 +1,11 @@
+.classes-page {
+  background-color: #f3f3f4;
+  background-image: url('/assets/workouts-section.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+:host-context(.dark) .classes-page {
+  background-color: #1e1e1e;
+}

@@ -1,0 +1,150 @@
+:host {
+  display: block;
+}
+
+.field-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.field-label {
+  color: var(--lib-field-label, #374151);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.field-input-shell {
+  position: relative;
+  width: 100%;
+}
+
+.field-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--lib-field-height, 2.75rem);
+  margin: 0;
+  padding: 0 var(--lib-field-pad-inline, 0.9rem);
+  background: var(--lib-field-bg, #fff);
+  border: 1px solid var(--lib-field-border, #d1d5db);
+  border-radius: var(--lib-field-radius, 0.6rem);
+  color: var(--lib-field-color, #111827);
+  color-scheme: var(--lib-field-color-scheme, light);
+  font: inherit;
+  font-size: var(--lib-field-font-size, 0.875rem);
+  outline: 0;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+textarea.field-input {
+  padding-block: 0.6rem;
+  resize: vertical;
+}
+
+.field-input::placeholder {
+  color: var(--lib-field-placeholder, #9ca3af);
+  opacity: 1;
+}
+
+.field-input:hover {
+  border-color: var(--lib-field-border-hover, #9ca3af);
+}
+
+.field-input:focus {
+  border-color: var(--lib-field-accent, #2563eb);
+  box-shadow: 0 0 0 3px var(--lib-field-ring, rgb(37 99 235 / 20%));
+}
+
+.field-input[aria-invalid='true'] {
+  border-color: var(--lib-field-error, #dc2626);
+}
+
+.field-icon,
+.field-trailing {
+  position: absolute;
+  top: 50%;
+  display: inline-flex;
+  color: var(--lib-field-icon, currentColor);
+  transform: translateY(-50%);
+}
+
+.field-icon {
+  inset-inline-start: var(--lib-field-pad-inline, 0.9rem);
+  pointer-events: none;
+}
+
+.field-trailing {
+  inset-inline-end: var(--lib-field-pad-inline, 0.9rem);
+}
+
+.has-icon .field-input {
+  padding-inline-start: calc(var(--lib-field-pad-inline, 0.9rem) + 1.6rem);
+}
+
+.has-trailing .field-input {
+  padding-inline-end: calc(var(--lib-field-pad-inline, 0.9rem) + 1.6rem);
+}
+
+.field-toggle {
+  display: inline-flex;
+  padding: 0.15rem;
+  background: none;
+  border: 0;
+  border-radius: 0.35rem;
+  color: inherit;
+  cursor: pointer;
+}
+
+.field-toggle:focus-visible {
+  outline: 2px solid var(--lib-field-accent, #2563eb);
+}
+
+select.field-input {
+  appearance: none;
+  cursor: pointer;
+}
+
+select.field-input.is-placeholder {
+  color: var(--lib-field-placeholder, #9ca3af);
+}
+
+select.field-input option {
+  color: initial;
+}
+
+.field-trailing.is-decorative {
+  pointer-events: none;
+}
+
+.field-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--lib-field-label, #374151);
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.field-check input {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin: 0;
+  accent-color: var(--lib-field-accent, #2563eb);
+}
+
+.field-error {
+  color: var(--lib-field-error, #dc2626);
+  font-size: 0.75rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

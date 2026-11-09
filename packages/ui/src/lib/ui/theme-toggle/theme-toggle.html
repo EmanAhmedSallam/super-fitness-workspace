@@ -1,0 +1,11 @@
+<button
+  type="button"
+  class="grid size-[40px] cursor-pointer place-items-center rounded-[50%] border-0 bg-[#FF4100] p-0 text-white focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-[#FF4100] focus-visible:outline-offset-[3px]"
+  [attr.aria-label]="(themeService.theme() === 'dark' ? 'ui.theme.switchToLight' : 'ui.theme.switchToDark') | translate"
+  (click)="themeService.toggleTheme()"
+>
+  <lib-field-icon
+    [name]="themeService.theme() === 'dark' ? 'sun' : 'moon'"
+    [size]="20"
+  />
+</button>

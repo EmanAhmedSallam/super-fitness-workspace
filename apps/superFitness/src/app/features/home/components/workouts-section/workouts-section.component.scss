@@ -1,0 +1,11 @@
+.workouts-section {
+   background-color: #f3f3f4;
+  background-image: url('/assets/workouts-section.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+:host-context(.dark) .workouts-section {
+  background-color: #1e1e1e;
+}

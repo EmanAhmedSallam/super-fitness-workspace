@@ -1,0 +1,26 @@
+@if (user(); as registered) {
+  <div class="flex w-full items-center justify-center p-6 font-['Baloo_2',system-ui,sans-serif] text-white">
+    <div class="w-full max-w-sm rounded-2xl border border-white/10 bg-white/5 p-8 text-center backdrop-blur-md">
+      <h2 class="mb-2 text-2xl font-bold">
+        {{ 'auth.register.success.welcome' | translate: { name: registered.firstName } }}
+      </h2>
+      <p class="mb-4 text-white/70">{{ 'auth.register.success.ready' | translate }}</p>
+      <a class="inline-block font-semibold text-[#ff4100] hover:underline" routerLink="/auth/login">{{
+        'auth.register.success.goToLogin' | translate
+      }}</a>
+    </div>
+  </div>
+} @else {
+  <app-choice-registration-step
+    [currentStep]="STEP.currentStep"
+    [totalSteps]="STEP.totalSteps"
+    [title]="STEP.titleKey | translate"
+    [description]="STEP.descriptionKey | translate"
+    [options]="STEP.options"
+    [nextLabel]="STEP.nextLabelKey | translate"
+    [submitting]="submitting()"
+    [errors]="errors()"
+    [(value)]="activityLevel"
+    (next)="onNext($event)"
+  />
+}

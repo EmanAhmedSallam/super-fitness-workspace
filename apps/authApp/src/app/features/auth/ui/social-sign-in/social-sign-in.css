@@ -1,0 +1,61 @@
+:host {
+  display: block;
+}
+
+.social-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(20 * var(--u, 1px));
+  margin: calc(27 * var(--u, 1px)) 0 0;
+  color: #8f8f8f;
+  font-size: max(11px, calc(12 * var(--u, 1px)));
+  line-height: 1;
+}
+
+.social-divider::before,
+.social-divider::after {
+  content: '';
+  width: calc(76 * var(--u, 1px));
+  height: 1px;
+  background: rgb(255 255 255 / 35%);
+}
+
+.social-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(18 * var(--u, 1px));
+  margin-top: calc(29 * var(--u, 1px));
+}
+
+.social-button {
+  display: grid;
+  place-items: center;
+  width: max(28px, calc(30 * var(--u, 1px)));
+  height: max(28px, calc(30 * var(--u, 1px)));
+  padding: 0;
+  background: rgb(0 0 0 / 18%);
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.social-button:hover {
+  background: rgb(255 65 0 / 18%);
+  color: #ff4100;
+}
+
+.social-button:focus-visible {
+  outline: 2px solid #ff4100;
+  outline-offset: 2px;
+}
+
+.social-button svg {
+  width: 60%;
+  height: 60%;
+}

@@ -1,0 +1,35 @@
+
+<div class="mx-auto grid w-fit max-w-full pt-[0.14em] pb-[0.21em]" [class]="sizeClass()">
+
+  <h2
+    class="col-start-1 row-start-1 m-0 py-[0.14em] -my-[0.14em] [mask-image:linear-gradient(to_bottom,#000_50%,rgb(0_0_0/25%)_100%)] select-none text-balance font-['Nunito',sans-serif] text-[1em] font-black uppercase leading-[0.72] tracking-[0.04em] text-(color:--st-bg) [-webkit-text-stroke:max(3px,0.028em)_#b9b9b9] [paint-order:stroke_fill] not-supports-[-webkit-text-stroke:1px_black]:text-black/8"
+    [class.text-center]="labelAlign() === 'center'"
+    [style.font-size.px]="primaryTextFontSize()">
+    {{ primaryText() }}
+  </h2>
+
+  <div
+    class="col-start-1 row-start-1 inline-flex translate-y-[0.153em] items-center gap-[0.19em] self-end text-[var(--auth-accent,#ff4100)]"
+    [class]="labelAlignClass()">
+    @if (showIcon()) {
+      <span class="inline-flex text-[0.364em] leading-none" aria-hidden="true">
+        @if (iconSvg()) {
+          <span
+            class="inline-flex h-[1em] leading-none [&>svg]:h-full [&>svg]:w-auto"
+            [innerHTML]="safeIconSvg()">
+          </span>
+        } @else {
+          <ng-container [ngComponentOutlet]="icon()" />
+        }
+      </span>
+    }
+
+    @if (secondaryText()) {
+      <p
+        class="m-0 whitespace-nowrap font-['Ubuntu',sans-serif] text-[0.244em] font-bold leading-none"
+        [style.font-size.px]="secondaryTextFontSize()">
+        {{ secondaryText() }}
+      </p>
+    }
+  </div>
+</div>

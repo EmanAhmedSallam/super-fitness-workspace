@@ -1,0 +1,68 @@
+<div class="field-control">
+  @if (field().label) {
+    <label class="field-label" [class.sr-only]="field().hideLabel" [for]="field().key">
+      {{ field().label }}{{ field().required ? ' *' : '' }}
+    </label>
+  }
+
+  <div class="field-input-shell" [class.has-icon]="!!field().icon">
+    @if (field().icon) {
+      <span class="field-icon"><lib-field-icon [name]="field().icon!" /></span>
+    }
+
+    @switch (field().type) {
+      @case ('number') {
+        <input
+          class="field-input"
+          type="number"
+          [attr.autocomplete]="field().autocomplete ?? null"
+          inputmode="decimal"
+          [id]="field().key"
+          [placeholder]="field().placeholder ?? ''"
+          [formField]="$any(control())"
+          [attr.aria-invalid]="showError() || null"
+          [attr.aria-describedby]="showError() ? errorId() : null"
+        />
+      }
+      @case ('date') {
+        <input
+          class="field-input"
+          type="date"
+          [attr.autocomplete]="field().autocomplete ?? null"
+          [id]="field().key"
+          [formField]="$any(control())"
+          [attr.aria-invalid]="showError() || null"
+          [attr.aria-describedby]="showError() ? errorId() : null"
+        />
+      }
+      @case ('email') {
+        <input
+          class="field-input"
+          type="email"
+          [attr.autocomplete]="field().autocomplete ?? 'email'"
+          [id]="field().key"
+          [placeholder]="field().placeholder ?? ''"
+          [formField]="$any(control())"
+          [attr.aria-invalid]="showError() || null"
+          [attr.aria-describedby]="showError() ? errorId() : null"
+        />
+      }
+      @default {
+        <input
+          class="field-input"
+          type="text"
+          [attr.autocomplete]="field().autocomplete ?? null"
+          [id]="field().key"
+          [placeholder]="field().placeholder ?? ''"
+          [formField]="$any(control())"
+          [attr.aria-invalid]="showError() || null"
+          [attr.aria-describedby]="showError() ? errorId() : null"
+        />
+      }
+    }
+  </div>
+
+  @if (showError()) {
+    <span class="field-error" [id]="errorId()">{{ control()().errors()[0]?.message }}</span>
+  }
+</div>

@@ -1,0 +1,86 @@
+.gallery {
+  width: min(600px, calc(100vw - 2rem));
+  padding: 0;
+  background: #fff;
+  border: 0;
+  border-radius: 0.75rem;
+}
+
+.gallery::backdrop {
+  background: rgb(0 0 0 / 55%);
+}
+
+.gallery-frame {
+  position: relative;
+}
+
+.gallery-image {
+  display: block;
+  width: 100%;
+}
+
+.gallery-close,
+.gallery-nav {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  background: rgb(0 0 0 / 50%);
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.gallery-close {
+  top: 0.5rem;
+  inset-inline-end: 0.5rem;
+}
+
+.gallery-nav {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.gallery-nav.prev {
+  inset-inline-start: 0.5rem;
+}
+
+.gallery-nav.next {
+  inset-inline-end: 0.5rem;
+}
+
+.gallery-dots {
+  position: absolute;
+  bottom: 0.75rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.gallery-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  background: rgb(255 255 255 / 55%);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.gallery-dot.active {
+  background: #fff;
+}
+
+:is(.gallery-close, .gallery-nav, .gallery-dot):focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Mirror the prev/next chevrons in right-to-left layouts. */
+:host-context([dir='rtl']) .gallery-nav > * {
+  transform: scaleX(-1);
+}

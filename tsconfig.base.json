@@ -21,6 +21,12 @@
       ],
       "@super-fitness/data-access-user": [
         "./packages/data-access-user/src/index.ts"
+      ],
+      "@super-fitness/auth": ["./packages/auth/src/index.ts"],
+      "@org/ui": ["./packages/ui/src/index.ts"],
+      "@org/i18n": ["./packages/shared/i18n/src/index.ts"],
+      "@org/util-directives": [
+        "./packages/shared/util-directives/src/index.ts"
       ]
     }
   },

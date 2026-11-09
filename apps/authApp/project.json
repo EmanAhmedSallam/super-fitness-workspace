@@ -4,11 +4,16 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/authApp/src",
-  "tags": ["scope:api", "type:app"],
+  "tags": [
+    "scope:api",
+    "type:app"
+  ],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/authApp",
@@ -20,9 +25,21 @@
           {
             "glob": "**/*",
             "input": "apps/authApp/public"
+          },
+          {
+            "glob": "*.json",
+            "input": "apps/shell/public/assets/i18n/shell",
+            "output": "assets/i18n/shell"
+          },
+          {
+            "glob": "*.woff2",
+            "input": "apps/shell/public/assets/fonts",
+            "output": "assets/fonts"
           }
         ],
-        "styles": ["apps/authApp/src/styles.scss"],
+        "styles": [
+          "apps/authApp/src/styles.css"
+        ],
         "customWebpackConfig": {
           "path": "apps/authApp/webpack.config.ts"
         }
@@ -62,7 +79,10 @@
       "defaultConfiguration": "development",
       "options": {
         "port": 4201,
-        "publicHost": "http://localhost:4201"
+        "publicHost": "http://localhost:4201",
+        "headers": {
+          "Access-Control-Allow-Origin": "*"
+        }
       },
       "configurations": {
         "production": {
@@ -71,8 +91,7 @@
         "development": {
           "buildTarget": "authApp:build:development"
         }
-      },
-      "dependsOn": ["shell:serve"]
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

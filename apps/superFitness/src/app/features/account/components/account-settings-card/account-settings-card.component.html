@@ -1,0 +1,29 @@
+<button
+      type="button"
+      (click)="activated.emit()"
+      class="flex aspect-[209/168] w-[209px] max-w-full flex-col items-center justify-center
+             rounded-2xl border bg-white/60 text-center backdrop-blur-sm
+             border-[#242424] dark:border-[#D3D3D3] dark:bg-white/5
+             gap-[clamp(0.5rem,1.1vw,1rem)]
+             p-[clamp(0.75rem,2.2vw,2rem)]
+             transition-all duration-300 ease-in-out
+             hover:border-[#FF4100] dark:hover:border-[#FF4100]
+             focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF4100]">
+
+     
+      <span class="grid size-[clamp(1.25rem,1.6vw,1.5rem)] shrink-0 place-items-center text-[#FF4100]"
+            aria-hidden="true">
+        <ng-content select="[icon]" />
+      </span>
+
+      
+      <span
+        class="font-sans font-semibold leading-none tracking-[0.26px] text-center align-middle
+               text-[clamp(0.8125rem,0.7rem+0.45vw,1.125rem)]
+               text-[#242424] dark:text-[#FFFFFF]"
+        [class.!text-[#FF4100]]="danger()">
+        {{ label() }}
+      </span>
+
+      <ng-content />
+    </button>

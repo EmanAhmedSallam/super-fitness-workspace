@@ -1,0 +1,51 @@
+:host {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--stp-size, 56px);
+  height: var(--stp-size, 56px);
+  flex-shrink: 0;
+}
+
+.stp-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* Start the arc from 12 o'clock */
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+
+.stp-ring__bg {
+  fill: none;
+  stroke: var(--stp-track, rgb(255 255 255 / 12%));
+  stroke-width: 3;
+}
+
+.stp-ring__arc {
+  fill: none;
+  stroke: var(--stp-accent, var(--auth-accent, #ff4100));
+  stroke-width: 3;
+  stroke-linecap: round;
+  /* 2π × 22 ≈ 138.23 */
+  stroke-dasharray: 138.23;
+  transition: stroke-dashoffset 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stp-label {
+  position: relative;
+  z-index: 1;
+  color: var(--stp-label-color, #fff);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  user-select: none;
+}
+
+.stp-sep {
+  color: rgb(255 255 255 / 45%);
+  margin-inline: 0.1em;
+}

@@ -4,11 +4,15 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/shell/src",
-  "tags": ["type:app"],
+  "tags": [
+    "type:app"
+  ],
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/shell",
@@ -20,9 +24,28 @@
           {
             "glob": "**/*",
             "input": "apps/shell/public"
+          },
+          {
+            "glob": "*.png",
+            "input": "apps/authApp/public/assets/auth",
+            "output": "assets/auth"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/superFitness/public/assets",
+            "output": "assets"
+          },
+          {
+            "glob": "*.json",
+            "input": "apps/authApp/public/assets/i18n/auth",
+            "output": "assets/i18n/auth"
           }
         ],
-        "styles": ["apps/shell/src/styles.css"],
+        "styles": [
+          "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+          "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
+          "apps/shell/src/styles.css"
+        ],
         "customWebpackConfig": {
           "path": "apps/shell/webpack.config.ts"
         }
@@ -68,7 +91,11 @@
         "development": {
           "buildTarget": "shell:build:development"
         }
-      }
+      },
+      "dependsOn": [
+        "authApp:serve",
+        "superFitness:serve"
+      ]
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

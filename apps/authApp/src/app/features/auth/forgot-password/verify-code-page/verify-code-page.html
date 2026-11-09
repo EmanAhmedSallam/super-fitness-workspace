@@ -1,0 +1,52 @@
+<main class="auth-page">
+  <div class="auth-area">
+    <lib-auth-header [title]="'auth.verifyCode.header' | translate" />
+
+    <section class="auth-card">
+      <h2 class="auth-title">{{ 'auth.verifyCode.title' | translate }}</h2>
+
+      <app-auth-feedback [errors]="errors()" [notice]="notice()" />
+
+      <form class="auth-form" (submit)="$event.preventDefault(); submit()" novalidate>
+        <app-otp-input
+          class="mt-[calc(10*var(--u))] mb-[calc(4*var(--u))]"
+          [length]="length()"
+          [value]="code()"
+          (valueChange)="onCodeChange($event)"
+          (completed)="submit()"
+          [disabled]="submitting()"
+          [invalid]="invalid()"
+          [label]="
+            'auth.verifyCode.label'
+              | translate: { email: email() ?? ('auth.verifyCode.yourEmail' | translate) }
+          "
+        />
+
+        @if (attempted() && !complete()) {
+          <p
+            class="mt-[calc(10*var(--u))] mb-0 text-center text-[#ff7a5c] text-[length:max(12px,calc(13*var(--u)))]"
+            role="alert"
+          >
+            {{ 'auth.verifyCode.incomplete' | translate: { length: length() } }}
+          </p>
+        }
+
+        <button type="submit" class="form-submit" [disabled]="submitting()">
+          {{ (submitting() ? 'auth.verifyCode.submitting' : 'auth.verifyCode.submit') | translate }}
+        </button>
+
+        <p class="auth-footnote">{{ 'auth.verifyCode.notReceived' | translate }}</p>
+        <p class="auth-footnote mt-[calc(4*var(--u))]!">
+          <button
+            type="button"
+            class="auth-link auth-link--strong"
+            [disabled]="submitting()"
+            (click)="resend()"
+          >
+            {{ 'auth.verifyCode.resend' | translate }}
+          </button>
+        </p>
+      </form>
+    </section>
+  </div>
+</main>

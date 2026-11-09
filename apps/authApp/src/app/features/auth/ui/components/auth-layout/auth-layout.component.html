@@ -1,0 +1,41 @@
+<main
+  class="relative min-h-screen isolate grid h-svh grid-rows-[auto_minmax(0,1fr)] overflow-hidden text-white scheme-dark md:grid-cols-2 md:grid-rows-1"
+>
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+    aria-hidden="true"
+  >
+    <img
+      src="assets/auth/background.png"
+      alt=""
+      class="h-full w-full scale-110 object-cover object-center blur-lg"
+    />
+    <div class="absolute inset-0 bg-[#17191d]/75"></div>
+  </div>
+  <aside
+    class="relative flex h-24 items-center justify-center overflow-hidden border-b border-orange-500/20 md:h-auto md:border-e md:border-b-0"
+  >
+    <img
+      src="assets/auth/hero.png"
+      [alt]="'app.name' | translate"
+      width="3000"
+      height="3000"
+      class="relative h-full w-36 object-contain md:absolute md:top-16 md:left-1/2 md:h-auto md:w-1/3 md:max-w-52 md:-translate-x-1/2"
+    />
+    <img
+      src="assets/auth/logo.png"
+      alt=""
+      width="2000"
+      height="2000"
+      class="pointer-events-none absolute bottom-12 left-1/2 hidden max-h-[65svh] w-4/5 max-w-2xl -translate-x-1/2 object-contain object-bottom md:block"
+    />
+  </aside>
+  <section
+    class="flex min-h-0 min-w-0 overflow-y-auto px-4 py-6 [scrollbar-width:none] sm:px-8 md:py-8 lg:px-12 [&::-webkit-scrollbar]:hidden"
+    [attr.aria-label]="'auth.layout.label' | translate"
+  >
+    <div class="m-auto flex w-full min-w-0 justify-center">
+      <router-outlet />
+    </div>
+  </section>
+</main>

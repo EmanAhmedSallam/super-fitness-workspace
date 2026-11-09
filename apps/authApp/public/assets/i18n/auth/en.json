@@ -1,0 +1,161 @@
+{
+  "auth": {
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "rePassword": "Re-password"
+    },
+    "validation": {
+      "email": "Enter a valid email address.",
+      "password": "At least 8 characters, with an uppercase, a lowercase, a number and a symbol.",
+      "passwordMismatch": "Passwords do not match.",
+      "minLength2": "Must be at least 2 characters."
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "noAccount": "There is no account with this email address.",
+      "badCode": "This code is invalid or has expired. Check your email or resend the code.",
+      "sessionExpired": "Your reset session has expired. Please request a new code."
+    },
+    "forgotPassword": {
+      "header": "Forget Password",
+      "title": "Enter Your Email",
+      "submit": "Send OTP",
+      "submitting": "Sending...",
+      "remember": "Remember Your Password ?",
+      "login": "Login"
+    },
+    "verifyCode": {
+      "header": "OTP CODE",
+      "title": "Enter Your OTP Check Your Email",
+      "label": "Verification code sent to {{email}}",
+      "yourEmail": "your email",
+      "incomplete": "Enter all {{length}} digits of the code.",
+      "submit": "Confirm",
+      "submitting": "Verifying...",
+      "notReceived": "Didn't Receive Verification Code ?",
+      "resend": "Resend Code",
+      "resent": "A new code was sent to {{email}}."
+    },
+    "resetPassword": {
+      "header": "Create New Password",
+      "headerDone": "Password Updated",
+      "title": "Make Sure Its 8 Characters Or More",
+      "submit": "Done",
+      "submitting": "Saving...",
+      "successTitle": "Your password has been reset",
+      "successText": "Taking you back to login so you can sign in with it.",
+      "goToLogin": "Go to login"
+    },
+    "otp": {
+      "label": "Verification code",
+      "digit": "Digit {{index}} of {{length}}"
+    },
+    "register": {
+      "common": {
+        "next": "Next"
+      },
+      "gender": {
+        "title": "Tell Us About Yourself!",
+        "description": "We Need To Know Your Gender",
+        "male": "Male",
+        "female": "Female"
+      },
+      "age": {
+        "title": "How Old Are You ?",
+        "description": "This Helps Us Create Your Personalized Plan",
+        "unit": "Years"
+      },
+      "weight": {
+        "title": "What Is Your Weight ?",
+        "description": "We Use This To Calculate Your Ideal Calorie Intake",
+        "unit": "KG",
+        "next": "Next"
+      },
+      "height": {
+        "title": "How Tall Are You ?",
+        "description": "Height Helps Us Estimate Your Basal Metabolic Rate",
+        "unit": "CM"
+      },
+      "account": {
+        "eyebrow": "Hey There",
+        "title": "Create An Account",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "submit": "Create Account",
+        "loginPrompt": "Already have an account?",
+        "loginLink": "Sign In",
+        "heading": "Register"
+      },
+      "profile": {
+        "title": "Tell Us About You",
+        "description": "A Few More Details To Complete Your Profile"
+      },
+      "goal": {
+        "title": "What Is Your Goal ?",
+        "description": "This Helps Us Create Your Personalized Plan",
+        "options": {
+          "gainWeight": "Gain Weight",
+          "loseWeight": "Lose Weight",
+          "getFitter": "Get Fitter",
+          "gainFlexible": "Gain More Flexible",
+          "learnBasics": "Learn The Basic"
+        }
+      },
+      "activity": {
+        "title": "Your Regular Physical Activity Level ?",
+        "description": "This Helps Us Create Your Personalized Plan",
+        "options": {
+          "rookie": "Rookie",
+          "beginner": "Beginner",
+          "intermediate": "Intermediate",
+          "advance": "Advance",
+          "trueBeast": "True Beast"
+        }
+      },
+      "success": {
+        "welcome": "Welcome, {{name}}!",
+        "ready": "Your Super Fitness account is ready.",
+        "goToLogin": "Go to login"
+      }
+    },
+    "login": {
+      "title": "Welcome Back",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "forgotPassword": "Forgot Password?",
+      "registerPrompt": "Don't have an account?",
+      "registerLink": "Sign Up",
+      "eyebrow": "Hey There",
+      "heading": "Login",
+      "submitting": "Signing in...",
+      "signedInNoHome": "Signed in. {{url}} is not available here."
+    },
+    "layout": {
+      "label": "Authentication"
+    },
+    "social": {
+      "or": "Or",
+      "continueWith": "Continue with {{provider}}",
+      "unavailable": "{{provider}} sign-in is not connected yet.",
+      "providers": {
+        "facebook": "Facebook",
+        "google": "Google",
+        "apple": "Apple"
+      }
+    },
+    "changePassword": {
+      "title": "Change password",
+      "subtitle": "Update your current credentials securely.",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "newPasswordPlaceholder": "Minimum 6 characters",
+      "submit": "Save password",
+      "submitting": "Updating..."
+    }
+  }
+}
