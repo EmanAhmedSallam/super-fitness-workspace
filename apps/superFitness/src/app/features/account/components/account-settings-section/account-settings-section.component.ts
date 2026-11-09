@@ -2,14 +2,14 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AppLanguage, LanguageService } from '@org/i18n';
-import { FieldIcon, ThemeService } from '@org/ui';
+import {  ThemeService } from '@org/ui';
 import { AuthSessionService } from '@super-fitness/auth';
 import { AccountSettingsCard } from '../account-settings-card/account-settings-card.component';
 
 @Component({
   selector: 'app-account-settings-section',
   standalone: true,
-  imports: [AccountSettingsCard, TranslatePipe,FieldIcon],
+  imports: [AccountSettingsCard, TranslatePipe],
   templateUrl: './account-settings-section.component.html',
   styleUrl: './account-settings-section.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

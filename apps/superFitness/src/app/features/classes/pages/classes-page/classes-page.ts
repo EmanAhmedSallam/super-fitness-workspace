@@ -1,6 +1,6 @@
 import {Component, DestroyRef, computed, inject, signal,} from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { catchError, from, map, mergeMap, of, Subscription, switchMap, tap, toArray } from 'rxjs';
+import { catchError,  map,  of, Subscription, switchMap } from 'rxjs';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '@org/i18n';
@@ -35,10 +35,8 @@ export class ClassesPage {
   private readonly _route = inject(ActivatedRoute);
   private readonly _languageService = inject(LanguageService);
 
-  private readonly groupDetails = new Map<string, MuscleModel[]>();
   private selectionRequest?: Subscription;
 
-  readonly groupLoadError = signal(false);
   readonly muscleGroups = signal<MuscleGroupModel[]>([]);
   readonly muscles = signal<MuscleModel[]>([]);
   readonly selectedGroupId = signal<string | null>(null);
@@ -82,67 +80,36 @@ export class ClassesPage {
 
 
 
-  constructor() {
-    toObservable(this._languageService.currentLang)
-      .pipe(
-        switchMap((language) => {
-          this.selectionRequest?.unsubscribe();
-          this.isLoadingGroups.set(true);
-          this.isLoadingMuscles.set(false);
-          this.errorMessage.set(null);
-          this.groupLoadError.set(false);
-          return this._musclesService.getAllMuscleGroups().pipe(
-            switchMap((response) => from(response.musclesGroup).pipe(
-              mergeMap((group) => {
-                const key = language + ':' + group._id;
-                const cached = this.groupDetails.get(key);
-                const details = cached !== undefined
-                  ? of(cached)
-                  : this._musclesService.getGroupById(group._id).pipe(
-                      map((result) => result.muscles),
-                      tap((muscles) => this.groupDetails.set(key, muscles)),
-                    );
-                return details.pipe(
-                  map((muscles) => ({ group, muscles })),
-                  catchError(() => of({ group, muscles: null })),
-                );
-              }, 3),
-              toArray(),
-              map((results) => ({
-                groups: response.musclesGroup.filter((group) => {
-                  const result = results.find((item) => item.group._id === group._id);
-                  return result?.muscles === null || !!result?.muscles.length;
-                }),
-                failed: results.some((result) => result.muscles === null),
-              })),
-            )),
-            catchError(() => {
-              this.errorMessage.set('workouts.error');
-              return of({ groups: [], failed: false });
-            }),
-          );
-        }),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe(({ groups, failed }) => {
-        this.muscleGroups.set(groups);
-        this.groupLoadError.set(failed);
-        this.isLoadingGroups.set(false);
-        const selected = groups.find((group) => group._id === this.selectedGroupId());
-        const firstLoaded = groups.find((group) =>
-          this.groupDetails.has(this._languageService.currentLang() + ':' + group._id),
+ constructor() {
+  toObservable(this._languageService.currentLang)
+    .pipe(
+      switchMap(() => {
+        this.selectionRequest?.unsubscribe();
+        this.isLoadingGroups.set(true);
+        this.isLoadingMuscles.set(false);
+        this.errorMessage.set(null);
+        return this._musclesService.getAllMuscleGroups().pipe(
+          map((response) => response.musclesGroup),
+          catchError(() => {
+            this.errorMessage.set('workouts.error');
+            return of([] as MuscleGroupModel[]);
+          }),
         );
-        const next = selected ?? firstLoaded ?? groups[0];
-        if (next && this.groupDetails.has(this._languageService.currentLang() + ':' + next._id)) {
-          this.selectGroup(next._id, true);
-        } else {
-          this.selectedGroupId.set(null);
-          this.muscles.set([]);
-          if (next) this.errorMessage.set('workouts.error');
-        }
-      });
-  }
-
+      }),
+      takeUntilDestroyed(this.destroyRef),
+    )
+    .subscribe((groups) => {
+      this.muscleGroups.set(groups);
+      this.isLoadingGroups.set(false);
+      if (groups.length === 0) {
+        this.selectedGroupId.set(null);
+        this.muscles.set([]);
+        return;
+      }
+      const next = groups.find((g) => g._id === this.selectedGroupId()) ?? groups[0];
+      this.selectGroup(next._id, true);
+    });
+}
   selectGroup(id: string, force = false): void {
     if (this.isLoadingGroups() || (!force && this.selectedGroupId() === id &&
         (!this.errorMessage() || this.isLoadingMuscles()))) return;
@@ -151,33 +118,14 @@ export class ClassesPage {
     this.selectionRequest?.unsubscribe();
     this.selectedGroupId.set(id);
     this.errorMessage.set(null);
-    const key = this._languageService.currentLang() + ':' + id;
-    const cached = this.groupDetails.get(key);
-    if (cached !== undefined) {
-      this.muscles.set(cached);
-      this.isLoadingMuscles.set(false);
-      return;
-    }
-
     this.isLoadingMuscles.set(true);
     this.muscles.set([]);
     this.selectionRequest = this._musclesService.getGroupById(id)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {
-          this.groupDetails.set(key, response.muscles);
+          this.muscles.set(response.muscles);
           this.isLoadingMuscles.set(false);
-          if (response.muscles.length === 0) {
-            this.muscleGroups.update((groups) => groups.filter((group) => group._id !== id));
-            this.selectedGroupId.set(null);
-            const next = this.muscleGroups()[0];
-            if (next) this.selectGroup(next._id);
-          } else {
-            this.muscles.set(response.muscles);
-          }
-          this.groupLoadError.set(this.muscleGroups().some((group) =>
-            !this.groupDetails.has(this._languageService.currentLang() + ':' + group._id),
-          ));
         },
         error: () => {
           this.errorMessage.set('workouts.error');

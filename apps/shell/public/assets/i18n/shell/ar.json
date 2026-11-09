@@ -17,10 +17,14 @@
   },
   "ui": {
     "theme": {
-      "switchToLight": "التبديل إلى الوضع الفاتح",
-      "switchToDark": "التبديل إلى الوضع الداكن"
+      "label": "الوضع",
+      "light": "نهار",
+      "dark": "ليل"
     },
     "language": {
+      "label": "اللغة",
+      "english": "الإنجليزية",
+      "arabic": "العربية",
       "switchToArabic": "تغيير اللغة إلى العربية",
       "switchToEnglish": "تغيير اللغة إلى الإنجليزية"
     },

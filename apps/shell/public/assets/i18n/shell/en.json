@@ -17,10 +17,16 @@
   },
   "ui": {
     "theme": {
+      "label": "Mode",
+      "light": "Light",
+      "dark": "Dark",
       "switchToLight": "Switch to light mode",
       "switchToDark": "Switch to dark mode"
     },
     "language": {
+      "label": "Language",
+      "english": "English",
+      "arabic": "Arabic",
       "switchToArabic": "Switch language to Arabic",
       "switchToEnglish": "Switch language to English"
     },

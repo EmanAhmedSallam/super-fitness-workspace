@@ -1,9 +1,10 @@
 <button
-  class="relative inline-flex min-h-12 items-center justify-center rounded-full border-[1.5px] border-[#ff4100] bg-[#ff4100] [font:inherit] font-bold leading-[1.15] text-white transition duration-150 hover:-translate-y-px focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[#ff410059] disabled:cursor-not-allowed disabled:opacity-55"
-  [class.bg-transparent]="type() === 'secondary'" [class.text-[#ff4100]]="type() === 'secondary'"
-  [class.pe-[34px]]="useIcon()" [style.padding]="padding()" [type]="buttonType()" [disabled]="disabled()"
+  class="relative inline-flex min-h-12 items-center justify-center rounded-full border-[1.5px] border-[#ff4100] bg-[#ff4100] [font:inherit] font-bold leading-[1.15]  transition duration-150 hover:-translate-y-px focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[#ff410059] disabled:cursor-not-allowed disabled:opacity-55"
+  [class.bg-transparent]="type() === 'secondary'" [class.text-[#ff4100]]="type() === 'secondary'" [class.text-white]="type() !== 'secondary'"
+ [style.padding-inline-end]="useIcon() ? '35px !important' : null"  
+ [style.padding]="padding()" [type]="buttonType()" [disabled]="disabled()"
   (click)="onClick()">
-  <span class="inline-flex items-center">
+  <span class="inline-flex items-center" >
     <ng-content />
   </span>
 

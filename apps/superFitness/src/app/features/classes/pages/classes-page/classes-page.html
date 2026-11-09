@@ -34,11 +34,6 @@
       {{ 'workouts.empty' | translate }}
     </p>
     } @else {
-    @if (groupLoadError()) {
-    <p class="py-4 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
-      {{ 'workouts.error' | translate }}
-    </p>
-    }
     <app-tabs-bar class="my-8 block" [tabs]="muscleGroupTabs()" [selectedId]="selectedGroupId()"
       (tabSelected)="selectGroup($event)" widthClass="w-full md:w-4/5 lg:w-1/2" />
 

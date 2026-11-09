@@ -81,7 +81,8 @@ ul {
 }
 
 .actions > lib-language-switcher,
-.actions > lib-theme-toggle {
+.actions > lib-theme-toggle,
+.actions > lib-site-button {
   display: none;
 }
 
@@ -145,6 +146,55 @@ ul {
   font-size: 20px;
 }
 
+.drawer-links .link:hover,
+.drawer-links .link.active {
+  color: #ff4100;
+}
+
+.drawer-controls {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+.drawer-controls .drawer-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: start;
+  cursor: pointer;
+}
+
+.drawer-control-value {
+  color: #ff4100;
+}
+
+.drawer-controls .drawer-control:first-child {
+  border-top: 1px solid rgb(41 42 43 / 15%);
+}
+
+.drawer-controls .drawer-auth-action {
+  justify-content: flex-start;
+  margin-top: 4px;
+  border-top: 1px solid rgb(41 42 43 / 15%);
+}
+
+.drawer-controls .drawer-login {
+  color: #ff4100;
+}
+
+.drawer-controls .drawer-logout {
+  color: #dc2626;
+}
+
 @keyframes slide-in {
   from {
     transform: translateX(-100%);
@@ -185,8 +235,13 @@ ul {
   }
 
   .actions > lib-language-switcher,
-  .actions > lib-theme-toggle {
+  .actions > lib-theme-toggle,
+  .actions > lib-site-button {
     display: inline-flex;
+  }
+
+  .drawer-controls {
+    display: none;
   }
 
   .drawer,
@@ -220,6 +275,14 @@ ul {
 :host-context(.dark) .drawer {
   background: #1e1e1e;
   box-shadow: 8px 8px 28px rgb(0 0 0 / 45%);
+}
+
+:host-context(.dark) .drawer-controls .drawer-control:first-child {
+  border-top-color: rgb(243 243 244 / 20%);
+}
+
+:host-context(.dark) .drawer-controls .drawer-auth-action {
+  border-top-color: rgb(243 243 244 / 20%);
 }
 
 :host-context(.dark[dir='rtl']) .drawer {
