@@ -14,22 +14,21 @@
   </ul>
 
   <div class="actions">
-    
-    @if (isAuthenticated) {
-      <lib-language-switcher />
+    <lib-language-switcher />
     <lib-theme-toggle />
+    @if (isAuthenticated) {
+      
       <a class="btn" routerLink="account" (click)="closeMenu()" [attr.aria-label]="'navbar.account' | translate">
         <lib-field-icon name="user" [size]="20" />
       </a>
     } @else {
-      <lib-site-button type="secondary" [useIcon]="true" padding="8px 34px 8px 14px" [action]="loginAction">
+      
+      <lib-site-button  type="main" [useIcon]="true" padding="8px 34px 8px 14px" [action]="loginAction">
         {{ 'navbar.login' | translate }}
         <svg siteButtonIcon class="rtl:-scale-x-100" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0206 0.707124C10.2967 2.43105 7.155 2.43175 5.43036 0.707116L4.72326 9.63389e-06L3.30904 1.41422L4.01615 2.12133C5.27056 3.37574 6.99731 4.00223 8.72478 4.00295L-0.000209446 12.7279L1.414 14.1422L10.139 5.41716C10.1397 7.14462 10.7662 8.87138 12.0206 10.1258L12.7277 10.8329L14.1419 9.41868L13.4348 8.71157C11.7102 6.98694 11.7109 3.84526 13.4348 2.12134L14.1419 1.41423L12.7277 1.70517e-05L12.0206 0.707124Z" fill="#F3F3F4" /></svg>
       </lib-site-button>
-      <lib-site-button type="main" [useIcon]="true" padding="8px 34px 8px 14px" [action]="registerAction" class="ms-3">
-        {{ 'navbar.register' | translate }}
-        <svg siteButtonIcon class="rtl:-scale-x-100" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0206 0.707124C10.2967 2.43105 7.155 2.43175 5.43036 0.707116L4.72326 9.63389e-06L3.30904 1.41422L4.01615 2.12133C5.27056 3.37574 6.99731 4.00223 8.72478 4.00295L-0.000209446 12.7279L1.414 14.1422L10.139 5.41716C10.1397 7.14462 10.7662 8.87138 12.0206 10.1258L12.7277 10.8329L14.1419 9.41868L13.4348 8.71157C11.7102 6.98694 11.7109 3.84526 13.4348 2.12134L14.1419 1.41423L12.7277 1.70517e-05L12.0206 0.707124Z" fill="#F3F3F4" /></svg>
-      </lib-site-button>
+      
+      
     }
     <button type="button" class="btn menu-btn" [attr.aria-label]="'navbar.openMenu' | translate"
       (click)="toggleMenu()">
@@ -61,5 +60,31 @@
     </li>
     }
   </ul>
+
+  <div class="drawer-controls">
+    <button type="button" class="link drawer-control"
+      [attr.aria-label]="(languageService.currentLang() === 'en' ? 'ui.language.switchToArabic' : 'ui.language.switchToEnglish') | translate"
+      (click)="toggleLanguage()">
+      <span>{{ 'ui.language.label' | translate }}</span>
+      <span class="drawer-control-value">{{ (languageService.currentLang() === 'en' ? 'ui.language.english' : 'ui.language.arabic') | translate }}</span>
+    </button>
+    <button type="button" class="link drawer-control"
+      [attr.aria-label]="(themeService.theme() === 'dark' ? 'ui.theme.switchToLight' : 'ui.theme.switchToDark') | translate"
+      (click)="toggleTheme()">
+      <span>{{ 'ui.theme.label' | translate }}</span>
+      <span class="drawer-control-value">{{ (themeService.theme() === 'dark' ? 'ui.theme.dark' : 'ui.theme.light') | translate }}</span>
+    </button>
+    @if (!isAuthenticated) {
+    <button type="button" class="link drawer-control drawer-auth-action drawer-login"
+      (click)="closeMenu(); navigateToLogin()">
+      {{ 'navbar.login' | translate }}
+    </button>
+    } @else {
+    <button type="button" class="link drawer-control drawer-auth-action drawer-logout"
+      (click)="logout()">
+      {{ 'account.settings.logout' | translate }}
+    </button>
+    }
+  </div>
 </nav>
 }

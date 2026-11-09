@@ -55,7 +55,7 @@ describe('Navbar', () => {
     expect(links.length).toBe(4);
   });
 
-  it('shows sign-in and sign-up buttons when the user is not authenticated', async () => {
+  it('shows language and theme controls with sign-in when the user is not authenticated', async () => {
     vi.spyOn(TestBed.inject(AuthSessionService), 'isAuthenticated').mockReturnValue(false);
     const fixture = TestBed.createComponent(Navbar);
     await fixture.whenStable();

@@ -19,7 +19,7 @@
             bg-[linear-gradient(180deg,rgba(243,243,244,0)_0%,rgba(243,243,244,0)_35%,rgba(243,243,244,0.9)_80%)]
             dark:bg-[linear-gradient(180deg,rgba(36,36,36,0)_0%,rgba(36,36,36,0)_35%,rgba(36,36,36,0.95)_80%)]"></div>
   <!-- Layer 3: play button -->
-  @if (videoUrl()) {
+  @if (embedUrl()) {
   <button type="button" (click)="play()" aria-label="Play" class="absolute left-1/2 top-1/2 z-10 grid -translate-x-1/2 -translate-y-1/2 place-items-center
                rounded-full bg-[#FF4100]/40 
                transition-transform duration-200 hover:scale-110

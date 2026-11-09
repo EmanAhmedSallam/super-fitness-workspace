@@ -111,8 +111,8 @@
 
           @if (selectedExercise(); as exercise) {
           <app-workout-player class="block h-full w-full" [title]="exercise.exercise"
-            [videoUrl]="'https://youtu.be/fAf6Z7wu7fM?si=6K5_014ZCoGfknf8'" [level]="exercise.difficulty_level"
-            [muscleImage]="selectedMuscleImage()" />
+             [exerciseId]="exercise._id" [level]="exercise.difficulty_level"
+            />
           } @else {
           <div class="absolute inset-0 animate-pulse bg-[#E5E5E7] motion-reduce:animate-none dark:bg-[#303030]"
             role="status">
