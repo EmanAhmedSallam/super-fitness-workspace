@@ -49,7 +49,7 @@ export class ChangePasswordPageComponent {
         next: () => {
           this.submitting.set(false);
           this.done.set(true);
-          const timer = setTimeout(() => void this.router.navigateByUrl('/'), REDIRECT_AFTER_MS);
+          const timer = setTimeout(() => void this.router.navigateByUrl('/auth/login'), REDIRECT_AFTER_MS);
           this.destroyRef.onDestroy(() => clearTimeout(timer));
         },
         error: (err) => {
