@@ -1,0 +1,4 @@
+{
+  "authApp": "https://super-fitness-auth-remote.vercel.app/remoteEntry.mjs",
+  "superFitness": "https://super-fitness-remote.vercel.app/remoteEntry.mjs"
+}
